@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="223-ФЗ">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f1729">
+    <meta name="description" content="Интерактивный обучающий ресурс по 223-ФЗ для сотрудников группы СГК">
+    <title>223-ФЗ | Обучающий ресурс</title>
+    <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22223-%D0%A4%D0%97%20%D0%9E%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%22%2C%22short_name%22%3A%22223-%D0%A4%D0%97%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f1729%22%2C%22theme_color%22%3A%22%230f1729%22%2C%22orientation%22%3A%22any%22%2C%22icons%22%3A%5B%5D%7D">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230f1729'/%3E%3Ctext x='90' y='110' font-size='80' font-weight='bold' text-anchor='middle' fill='%23f5a623'%3E223%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --nav-bg: #0f1729;
+    --nav-hover: #1a2744;
+    --nav-active: #243459;
+    --accent: #f5a623;
+    --accent-hover: #e69516;
+    --accent-soft: rgba(245,166,35,.1);
+    --accent-softer: rgba(245,166,35,.06);
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1a1d26;
+    --text-2: #4a5068;
+    --text-3: #8890a4;
+    --border: #e2e5eb;
+    --border-light: #eef0f4;
+    --blue: #3b82f6;
+    --blue-soft: rgba(59,130,246,.08);
+    --green: #10b981;
+    --green-soft: rgba(16,185,129,.08);
+    --red: #ef4444;
+    --red-soft: rgba(239,68,68,.08);
+    --purple: #8b5cf6;
+    --purple-soft: rgba(139,92,246,.08);
+    --orange: #f97316;
+    --orange-soft: rgba(249,115,22,.08);
+    --teal: #14b8a6;
+    --teal-soft: rgba(20,184,166,.08);
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+    --shadow: 0 2px 8px rgba(0,0,0,.08);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;}
+
+/* ===== SIDEBAR ===== */
+.sidebar{width:290px;background:var(--nav-bg);color:#fff;position:fixed;top:0;left:0;bottom:0;z-index:200;display:flex;flex-direction:column;overflow-y:auto;transition:transform .3s;}
+.sidebar-header{padding:1.25rem 1.3rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.logo{display:flex;align-items:center;gap:.7rem;}
+.logo-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(245,166,35,.12);padding:3px;}
+.logo-icon svg{width:34px;height:34px;}
+.logo-text{font-family:Georgia,'Times New Roman',serif;font-size:1.25rem;font-weight:700;letter-spacing:-.3px;}
+.logo-text .snab{color:#fff;}
+.logo-text .chat{color:var(--accent);}
+.logo-sub{font-size:.62rem;color:var(--text-3);margin-top:2px;letter-spacing:.4px;text-transform:uppercase;}
+.sidebar-nav{flex:1;padding:.75rem 0;}
+.nav-group{margin-bottom:.5rem;}
+.nav-group-label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.3);padding:.5rem 1.3rem .3rem;}
+.nav-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1.3rem;color:rgba(255,255,255,.6);font-size:.84rem;font-weight:500;cursor:pointer;transition:all .15s;border-left:3px solid transparent;text-decoration:none;}
+.nav-item:hover{background:var(--nav-hover);color:rgba(255,255,255,.9);}
+.nav-item.active{background:var(--nav-active);color:#fff;border-left-color:var(--accent);}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.6;}
+.nav-item:hover svg{opacity:.8;}
+.nav-item.active svg{opacity:1;color:var(--accent);}
+.nav-item .tag-count{margin-left:auto;background:rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.6rem;padding:.1rem .4rem;border-radius:10px;font-weight:600;}
+.nav-item.active .tag-count{background:var(--accent-soft);color:var(--accent);}
+.sidebar-footer{padding:1rem 1.3rem;border-top:1px solid rgba(255,255,255,.08);font-size:.65rem;color:rgba(255,255,255,.25);text-align:center;line-height:1.4;}
+.series-badge{display:inline-block;font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:.15rem .45rem;border-radius:3px;background:var(--accent-soft);color:var(--accent);margin-bottom:.5rem;}
+
+/* ===== MAIN ===== */
+.main-wrap{margin-left:290px;flex:1;min-height:100vh;display:flex;flex-direction:column;}
+.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-title{font-size:.95rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:.5rem;}
+.topbar-title .badge{background:var(--accent-soft);color:var(--accent);font-size:.6rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.3px;}
+.topbar-title .brand{font-family:Georgia,'Times New Roman',serif;font-weight:700;}
+.topbar-title .brand .snab{color:#003A7A;}
+.topbar-title .brand .chat{color:#0099CC;}
+.topbar-right{display:flex;align-items:center;gap:.75rem;}
+.topbar-btn{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.4rem .8rem;font-size:.75rem;font-weight:500;color:var(--text-2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:.3rem;}
+.topbar-btn:hover{border-color:var(--accent);color:var(--accent);}
+.topbar-btn svg{width:14px;height:14px;}
+
+.content{flex:1;padding:1.5rem 2.5rem;max-width:1200px;}
+
+/* ===== SECTION CARDS ===== */
+.sec{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow-sm);}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.2rem;cursor:pointer;transition:background .15s;user-select:none;}
+.sec-head:hover{background:var(--bg);}
+.sec-left{display:flex;align-items:center;gap:.7rem;}
+.sec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sec-dot.c-blue{background:var(--blue);}
+.sec-dot.c-green{background:var(--green);}
+.sec-dot.c-purple{background:var(--purple);}
+.sec-dot.c-orange{background:var(--orange);}
+.sec-dot.c-red{background:var(--red);}
+.sec-dot.c-teal{background:var(--teal);}
+.sec-dot.c-accent{background:var(--accent);}
+.sec-name{font-size:.88rem;font-weight:600;color:var(--text);}
+.sec-tags{display:flex;gap:.35rem;margin-left:.5rem;}
+.tag{font-size:.58rem;font-weight:600;padding:.15rem .4rem;border-radius:3px;text-transform:uppercase;letter-spacing:.3px;}
+.tag-blue{background:var(--blue-soft);color:var(--blue);}
+.tag-green{background:var(--green-soft);color:var(--green);}
+.tag-red{background:var(--red-soft);color:var(--red);}
+.tag-purple{background:var(--purple-soft);color:var(--purple);}
+.tag-orange{background:var(--orange-soft);color:var(--orange);}
+.tag-teal{background:var(--teal-soft);color:var(--teal);}
+.tag-accent{background:var(--accent-soft);color:var(--accent);}
+.chevron{width:18px;height:18px;color:var(--text-3);transition:transform .25s;flex-shrink:0;}
+.sec.open .chevron{transform:rotate(180deg);}
+.sec-body{display:none;padding:1.2rem;border-top:1px solid var(--border-light);animation:slideDown .25s;}
+.sec.open .sec-body{display:block;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== CONTENT ELEMENTS ===== */
+.heading{font-size:.82rem;font-weight:700;color:var(--text);margin:1.2rem 0 .5rem;text-transform:uppercase;letter-spacing:.4px;}
+.heading:first-child{margin-top:0;}
+.para{font-size:.85rem;color:var(--text-2);margin-bottom:.8rem;line-height:1.65;}
+
+/* Callout */
+.callout{padding:1rem 1.2rem;border-radius:var(--radius-sm);margin-bottom:1rem;font-size:.84rem;line-height:1.6;}
+.callout-accent{background:var(--accent-softer);border-left:3px solid var(--accent);color:var(--text);}
+.callout-blue{background:var(--blue-soft);border-left:3px solid var(--blue);color:var(--text);}
+.callout-red{background:var(--red-soft);border-left:3px solid var(--red);color:var(--text);}
+.callout strong{font-weight:600;}
+.callout-src{font-size:.72rem;color:var(--text-3);margin-top:.4rem;}
+
+/* Items */
+.items{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.8rem;}
+.item{display:flex;align-items:flex-start;gap:.6rem;padding:.5rem .7rem;background:var(--bg);border-radius:var(--radius-sm);font-size:.83rem;color:var(--text-2);}
+.item-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:.45rem;flex-shrink:0;}
+.item strong{color:var(--text);font-weight:600;}
+
+/* Numbered steps */
+.steps{display:flex;flex-direction:column;gap:.5rem;}
+.step{display:flex;gap:.7rem;padding:.7rem;background:var(--bg);border-radius:var(--radius-sm);border-left:3px solid var(--accent);}
+.step-n{width:26px;height:26px;background:var(--nav-bg);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;}
+.step-body{flex:1;}
+.step-t{font-size:.84rem;font-weight:600;color:var(--text);margin-bottom:.15rem;}
+.step-d{font-size:.78rem;color:var(--text-2);line-height:1.5;}
+.step-who{font-size:.65rem;font-weight:600;color:var(--accent);margin-top:.3rem;text-transform:uppercase;letter-spacing:.3px;}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;margin:.5rem 0 .8rem;font-size:.8rem;}
+.tbl th{background:var(--nav-bg);color:#fff;padding:.55rem .7rem;text-align:left;font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.3px;}
+.tbl th:first-child{border-radius:var(--radius-sm) 0 0 0;}
+.tbl th:last-child{border-radius:0 var(--radius-sm) 0 0;}
+.tbl td{padding:.55rem .7rem;border-bottom:1px solid var(--border-light);color:var(--text-2);}
+.tbl td strong{color:var(--text);font-weight:600;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--bg);}
+
+/* Key points */
+.kps{display:grid;gap:.5rem;margin-bottom:.8rem;}
+.kp{display:flex;gap:.6rem;padding:.65rem .8rem;background:var(--bg);border-radius:var(--radius-sm);align-items:flex-start;}
+.kp-n{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;color:#fff;}
+.kp-text{font-size:.83rem;color:var(--text-2);}
+.kp-text strong{color:var(--text);}
+
+/* Threshold bar */
+.thresh-bar{display:flex;border-radius:var(--radius-sm);overflow:hidden;margin:.8rem 0 1rem;height:44px;}
+.thresh-seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:600;text-align:center;padding:.25rem .4rem;line-height:1.2;}
+
+/* Company grid */
+.co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.5rem;}
+.co-card{padding:.6rem .8rem;border-radius:var(--radius-sm);border:1px solid var(--border-light);background:var(--card);display:flex;align-items:center;justify-content:space-between;gap:.5rem;transition:all .15s;}
+.co-card:hover{border-color:var(--accent);box-shadow:var(--shadow-sm);}
+.co-card.fz .co-badge{background:var(--blue-soft);color:var(--blue);}
+.co-card.nonfz{opacity:.55;}
+.co-card.nonfz .co-badge{background:var(--bg);color:var(--text-3);}
+.co-name{font-size:.8rem;font-weight:500;color:var(--text);}
+.co-sub{font-size:.68rem;color:var(--text-3);}
+.co-badge{font-size:.6rem;font-weight:600;padding:.15rem .45rem;border-radius:3px;white-space:nowrap;}
+.co-badge.t100{background:var(--orange-soft);color:var(--orange);}
+
+/* Search */
+.search{width:100%;padding:.55rem .9rem;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.82rem;background:var(--card);font-family:inherit;margin-bottom:.8rem;transition:border-color .15s;}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);}
+
+/* Tabs */
+.tabs{display:flex;gap:.4rem;margin-bottom:.8rem;}
+.tab{padding:.4rem .8rem;border:1px solid var(--border);background:var(--card);border-radius:var(--radius-sm);font-size:.75rem;font-weight:500;cursor:pointer;transition:all .15s;color:var(--text-2);}
+.tab.on{background:var(--nav-bg);color:#fff;border-color:var(--nav-bg);}
+.tab-pane{display:none;animation:slideDown .25s;}
+.tab-pane.on{display:block;}
+
+/* Role grid */
+.role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem;}
+.role{padding:.8rem;border-radius:var(--radius-sm);border:1px solid var(--border-light);background:var(--card);}
+.role-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:.5rem;font-size:1rem;}
+.role-t{font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+.role-d{font-size:.77rem;color:var(--text-2);line-height:1.5;}
+
+/* Flowchart */
+.flow{display:flex;flex-direction:column;align-items:center;gap:0;padding:.5rem 0;}
+.flow-node{padding:.6rem 1rem;border-radius:var(--radius-sm);text-align:center;font-size:.8rem;font-weight:500;max-width:320px;width:100%;cursor:pointer;transition:all .2s;border:2px solid var(--border);}
+.flow-node:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
+.flow-node.n-start{background:var(--nav-bg);color:#fff;border-color:var(--nav-bg);font-weight:600;}
+.flow-node.n-q{border-style:dashed;border-color:var(--accent);background:var(--accent-softer);position:relative;}
+.flow-node.n-q::after{content:'?';position:absolute;top:-7px;right:-7px;width:18px;height:18px;background:var(--accent);color:var(--nav-bg);border-radius:50%;font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.flow-node.n-blue{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:600;}
+.flow-node.n-blue:hover{background:var(--blue);color:#fff;}
+.flow-node.n-red{border-color:var(--red);background:var(--red-soft);color:var(--red);font-weight:600;}
+.flow-node.n-red:hover{background:var(--red);color:#fff;}
+.flow-node.n-purple{border-color:var(--purple);background:var(--purple-soft);color:var(--purple);font-weight:600;}
+.flow-node.n-purple:hover{background:var(--purple);color:#fff;}
+.flow-node.n-green{border-color:var(--green);background:var(--green-soft);color:var(--green);font-weight:600;}
+.flow-node.n-green:hover{background:var(--green);color:#fff;}
+.flow-node.n-teal{border-color:var(--teal);background:var(--teal-soft);color:var(--teal);font-weight:600;}
+.flow-node.n-teal:hover{background:var(--teal);color:#fff;}
+.flow-arr{width:2px;height:20px;background:var(--border);position:relative;}
+.flow-arr::after{content:'';position:absolute;bottom:0;left:-3.5px;border-left:4.5px solid transparent;border-right:4.5px solid transparent;border-top:5px solid var(--border);}
+.flow-row{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;width:100%;}
+.flow-col{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;min-width:130px;max-width:190px;}
+.flow-lbl{font-size:.6rem;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;}
+
+/* Detail panel */
+.dpanel{display:none;background:var(--card);border:2px solid var(--accent);border-radius:var(--radius);padding:1.2rem;margin-top:.8rem;box-shadow:var(--shadow-lg);animation:slideDown .25s;}
+.dpanel.vis{display:block;}
+.dpanel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent);}
+.dpanel-t{font-size:.95rem;font-weight:700;color:var(--text);}
+.dpanel-x{width:28px;height:28px;border:none;background:var(--bg);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.dpanel-x:hover{background:var(--red);color:#fff;}
+.dpanel-x svg{width:14px;height:14px;}
+
+/* Scroll top */
+.scroll-top{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;background:var(--nav-bg);color:var(--accent);border:none;border-radius:var(--radius-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transition:all .3s;z-index:300;}
+.scroll-top.vis{opacity:1;visibility:visible;}
+.scroll-top:hover{background:var(--accent);color:var(--nav-bg);}
+.scroll-top svg{width:18px;height:18px;}
+
+/* Mobile sidebar */
+.burger{display:none;width:36px;height:36px;background:var(--nav-bg);border:none;border-radius:var(--radius-sm);color:var(--accent);cursor:pointer;align-items:center;justify-content:center;}
+.burger svg{width:20px;height:20px;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:150;}
+/* Tablet */
+@media(max-width:1024px){
+    .sidebar{width:260px;}
+    .main-wrap{margin-left:260px;}
+    .content{max-width:100%;padding:1.2rem 1.5rem;}
+}
+/* Mobile */
+@media(max-width:768px){
+    .sidebar{transform:translateX(-100%);width:290px;}
+    .sidebar.open{transform:translateX(0);}
+    .overlay.open{display:block;}
+    .main-wrap{margin-left:0;}
+    .burger{display:flex;}
+    .content{padding:1rem .75rem;}
+    .topbar{padding:.6rem 1rem;}
+    .sec-head{padding:.75rem 1rem;min-height:48px;}
+    .sec-body{padding:1rem;}
+    .nav-item{padding:.7rem 1.3rem;min-height:44px;}
+    .flow-row{flex-direction:column;align-items:center;}
+    .flow-col{max-width:100%;}
+    .flow-node{max-width:100%;min-height:44px;display:flex;align-items:center;justify-content:center;}
+    .co-grid{grid-template-columns:1fr;}
+    .co-card{min-height:48px;}
+    .role-grid{grid-template-columns:1fr;}
+    .thresh-bar{flex-direction:column;height:auto;}
+    .thresh-seg{padding:.55rem .6rem;min-height:40px;}
+    .tab{min-height:40px;padding:.5rem .7rem;}
+    .topbar-btn{min-height:36px;padding:.4rem .6rem;}
+    .dpanel{margin-top:.5rem;padding:1rem;}
+    .step{flex-direction:row;gap:.5rem;}
+    .tbl{font-size:.75rem;}
+    .tbl th,.tbl td{padding:.45rem .5rem;}
+    .scroll-top{bottom:1rem;right:1rem;width:44px;height:44px;}
+    .kps{gap:.4rem;}
+    .kp{padding:.55rem .65rem;}
+    .heading{font-size:.78rem;}
+    .para{font-size:.82rem;}
+    body{padding-bottom:env(safe-area-inset-bottom);}
+}
+/* Small phone */
+@media(max-width:400px){
+    .content{padding:.75rem .5rem;}
+    .sec-head{padding:.65rem .75rem;}
+    .sec-body{padding:.75rem;}
+    .sec-name{font-size:.82rem;}
+    .tag{font-size:.52rem;}
+    .topbar-title{font-size:.85rem;}
+    .topbar-btn span,.topbar-btn{font-size:.7rem;}
+    .flow-node{font-size:.75rem;padding:.5rem .7rem;}
+    .step-d{font-size:.74rem;}
+    .role-d{font-size:.74rem;}
+}
+@media print{
+    .sidebar,.topbar,.scroll-top{display:none!important;}
+    .main-wrap{margin-left:0;}
+    .sec-body{display:block!important;}
+}
+    </style>
+</head>
+<body>
+
+<!-- OVERLAY for mobile -->
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">
+            <div class="logo-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><clipPath id="sq"><rect width="512" height="512" rx="112" ry="112"/></clipPath></defs><rect width="512" height="512" rx="112" ry="112" fill="rgba(245,166,35,.15)"/><g clip-path="url(#sq)"><rect x="120" y="100" width="200" height="260" rx="28" fill="#c47a10"/><rect x="160" y="140" width="200" height="260" rx="28" fill="#e69516"/><rect x="200" y="180" width="200" height="260" rx="28" fill="#f5a623"/><rect x="328" y="368" width="52" height="40" rx="12" fill="#fff"/><polygon points="338,408 328,424 348,408" fill="#fff"/></g></svg></div>
+            <div><div class="logo-text"><span class="snab">Снаб</span><span class="chat">Чат</span></div><div class="logo-sub">Дирекция по ресурсному обеспечению</div></div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-group">
+            <div class="nav-group-label">Обучение</div>
+            <a class="nav-item active" onclick="goTo('likbez')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                Ликбез по 223-ФЗ
+            </a>
+            <a class="nav-item" onclick="goTo('companies')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                Компании группы
+                <span class="tag-count">38</span>
+            </a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-label">Процедуры</div>
+            <a class="nav-item" onclick="goTo('methods')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                Способы закупок
+                <span class="tag-count">16</span>
+            </a>
+            <a class="nav-item" onclick="goTo('thresholds')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Ценовые пороги
+            </a>
+            <a class="nav-item" onclick="goTo('masterflow')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Схема выбора способа
+            </a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-group-label">Управление</div>
+            <a class="nav-item" onclick="goTo('roles')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                Роли участников
+                <span class="tag-count">6</span>
+            </a>
+            <a class="nav-item" onclick="goTo('collegial')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                ЗКО
+            </a>
+            <a class="nav-item" onclick="goTo('nmcd')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                НМЦД
+            </a>
+        </div>
+    </nav>
+    <div class="sidebar-footer"><div class="series-badge">Курс 1 из серии</div><br>Дирекция по ресурсному обеспечению · 2026<br>Разработка @Кирилл Трубицын</div>
+</aside>
+
+<!-- MAIN -->
+<div class="main-wrap">
+    <div class="topbar">
+        <div style="display:flex;align-items:center;gap:.75rem;">
+            <a href="/" style="display:flex;align-items:center;gap:.3rem;color:var(--text-3);text-decoration:none;font-size:.75rem;font-weight:500;margin-right:.5rem;transition:color .15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Academy</a>
+            <button class="burger" onclick="openSidebar()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            <div class="topbar-title">223-ФЗ: Обучающий ресурс <span class="badge">ИНТЕРАКТИВ</span></div>
+        </div>
+        <div class="topbar-right">
+            <button class="topbar-btn" onclick="expandAll()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg> Развернуть</button>
+            <button class="topbar-btn" onclick="collapseAll()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg> Свернуть</button>
+        </div>
+    </div>
+
+    <div class="content">
+
+<!-- ===== ЛИКБЕЗ ===== -->
+<div class="sec open" id="likbez">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-blue"></div><div class="sec-name">Правовой ликбез: что такое 223-ФЗ</div><div class="sec-tags"><span class="tag tag-blue">Закон</span><span class="tag tag-green">Основы</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>Суть закона.</strong> Федеральный закон № 223-ФЗ «О закупках товаров, работ, услуг отдельными видами юридических лиц» устанавливает общие принципы и требования к закупочной деятельности организаций с государственным участием. Цель: прозрачность, конкуренция, эффективное расходование средств.</div>
+
+        <div class="heading">Кто подпадает под действие 223-ФЗ</div>
+        <div class="items">
+            <div class="item"><div class="item-dot"></div><strong>Государственные корпорации и компании</strong>, публично-правовые компании</div>
+            <div class="item"><div class="item-dot"></div><strong>Субъекты естественных монополий</strong> (компании, занимающие монопольное положение)</div>
+            <div class="item"><div class="item-dot"></div><strong>Организации коммунальной сферы</strong>: электро-, газо-, тепло-, водоснабжение, водоотведение, очистка сточных вод, обработка ТКО</div>
+            <div class="item"><div class="item-dot"></div><strong>Автономные учреждения</strong></div>
+            <div class="item"><div class="item-dot"></div><strong>Хозяйственные общества с госучастием свыше 50%</strong> и их дочерние общества</div>
+        </div>
+
+        <div class="callout callout-blue">Компании группы СГК работают в сфере теплоэнергетики и теплоснабжения — организации регулируемых видов деятельности, подпадающие под 223-ФЗ как субъекты в сфере электро- и теплоснабжения.<div class="callout-src">ч. 2 ст. 1 Федерального закона № 223-ФЗ</div></div>
+
+        <div class="heading">Четыре принципа закупок</div>
+        <div class="kps">
+            <div class="kp"><div class="kp-n" style="background:var(--blue);">1</div><div class="kp-text"><strong>Информационная открытость</strong> — сведения о закупке размещаются в ЕИС</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--green);">2</div><div class="kp-text"><strong>Равноправие и отсутствие дискриминации</strong> — запрет на создание преимуществ отдельным участникам</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--purple);">3</div><div class="kp-text"><strong>Эффективное расходование средств</strong> — оптимальное соотношение цены и качества</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--orange);">4</div><div class="kp-text"><strong>Объективность требований</strong> — требования к участникам должны быть проверяемы</div></div>
+        </div>
+
+        <div class="heading">Что НЕ регулируется 223-ФЗ</div>
+        <div class="items">
+            <div class="item"><div class="item-dot"></div>Купля-продажа ценных бумаг и валютных ценностей</div>
+            <div class="item"><div class="item-dot"></div>Приобретение биржевых товаров на товарной бирже</div>
+            <div class="item"><div class="item-dot"></div>Закупки в рамках международных договоров РФ</div>
+            <div class="item"><div class="item-dot"></div>Закупки, связанные с государственной тайной</div>
+            <div class="item"><div class="item-dot"></div>Отбор финансовых организаций для оказания финансовых услуг</div>
+            <div class="item"><div class="item-dot"></div>Операции по привлечению во вклады и размещению денежных средств</div>
+        </div>
+
+        <div class="heading">Ключевой документ: Положение о закупках</div>
+        <div class="callout callout-accent">Каждая организация, подпадающая под 223-ФЗ, обязана утвердить и разместить в ЕИС <strong>Положение о закупках</strong>. В группе СГК действует единый Стандарт закупок, реализующий требования Положения.<div class="callout-src">ч. 2, 3 ст. 2 Федерального закона № 223-ФЗ</div></div>
+
+        <div class="heading">Обязанности по размещению информации в ЕИС</div>
+        <table class="tbl">
+            <thead><tr><th>Документ</th><th>Срок размещения</th></tr></thead>
+            <tbody>
+                <tr><td>Положение о закупке</td><td>15 дней с утверждения</td></tr>
+                <tr><td>План закупок</td><td>Не менее чем на 1 год</td></tr>
+                <tr><td>План закупок МСП</td><td>Не менее чем на 3 года</td></tr>
+                <tr><td>Извещение о закупке</td><td>До начала процедуры</td></tr>
+                <tr><td>Протоколы закупки</td><td>В течение 3 дней</td></tr>
+                <tr><td>Информация о договоре</td><td>В реестр договоров (3 дня)</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ===== КОМПАНИИ ===== -->
+<div class="sec" id="companies">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-green"></div><div class="sec-name">Компании группы СГК</div><div class="sec-tags"><span class="tag tag-blue">38 по 223-ФЗ</span><span class="tag tag-orange">10 вне</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>38 компаний</strong> группы СГК работают по 223-ФЗ. Порог простой закупки для большинства — <strong>500 тыс. руб.</strong> с НДС. Для компаний с годовой выручкой менее 5 млрд руб. — пониженный порог <strong>100 тыс. руб.</strong></div>
+        <input type="text" class="search" id="companySearch" placeholder="Поиск по названию..." oninput="filterCo()">
+        <div class="tabs">
+            <button class="tab on" onclick="swTab(this,'t223')">По 223-ФЗ (38)</button>
+            <button class="tab" onclick="swTab(this,'tOther')">Вне 223-ФЗ (10)</button>
+        </div>
+        <div id="t223" class="tab-pane on">
+            <div class="co-grid" id="cg223">
+                <div class="co-card fz" data-n="красноярская тэц-2"><div><div class="co-name">Красноярская ТЭЦ-2</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="красноярская тэц-3"><div><div class="co-name">Красноярская ТЭЦ-3</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="минусинская тэц"><div><div class="co-name">Минусинская ТЭЦ</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="красноярская теплосеть"><div><div class="co-name">Красноярская Теплосеть</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="красноярская грэс-2"><div><div class="co-name">Красноярская ГРЭС-2</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="красноярская тэц-1"><div><div class="co-name">Красноярская ТЭЦ-1</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="канская тэц"><div><div class="co-name">Канская ТЭЦ</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="канская теплосеть"><div><div class="co-name">Канская теплосеть</div><div class="co-sub">фил. АО «Енисейская ТГК»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="абаканская тэц"><div><div class="co-name">АО «Абаканская ТЭЦ»</div><div class="co-sub">и филиал</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="крастэк"><div><div class="co-name">ООО «КрасТЭК»</div></div><span class="co-badge t100">100 тыс.</span></div>
+                <div class="co-card fz" data-n="ртк-генерация"><div><div class="co-name">ООО «РТК-генерация»</div></div><span class="co-badge t100">100 тыс.</span></div>
+                <div class="co-card fz" data-n="назаровская грэс"><div><div class="co-name">АО «Назаровская ГРЭС»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="кызылская тэц"><div><div class="co-name">АО «Кызылская ТЭЦ»</div></div><span class="co-badge t100">100 тыс.</span></div>
+                <div class="co-card fz" data-n="беловская грэс"><div><div class="co-name">Беловская ГРЭС</div><div class="co-sub">АО «Кузбассэнерго»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="гтэс новокузнецкая"><div><div class="co-name">ГТЭС Новокузнецкая</div><div class="co-sub">АО «Кузбассэнерго»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="томь-усинская грэс"><div><div class="co-name">Томь-Усинская ГРЭС</div><div class="co-sub">АО «Кузбассэнерго»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="кемеровская теплосетевая"><div><div class="co-name">Кемеровская теплосетевая компания</div><div class="co-sub">фил. АО «Кузбассэнерго»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="межрегиональная теплосетевая"><div><div class="co-name">Межрегиональная теплосетевая компания</div><div class="co-sub">фил. АО «Кузбассэнерго»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="приморская грэс"><div><div class="co-name">Приморская ГРЭС</div><div class="co-sub">фил. АО «Кузбассэнерго»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="рефтинская грэс"><div><div class="co-name">ОСП Рефтинская ГРЭС</div><div class="co-sub">АО «Кузбассэнерго»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="теплоэнергетик"><div><div class="co-name">ООО «Теплоэнергетик»</div></div><span class="co-badge t100">100 тыс.</span></div>
+                <div class="co-card fz" data-n="кемеровская грэс"><div><div class="co-name">Кемеровская ГРЭС</div><div class="co-sub">АО «Кемеровская генерация»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="кемеровская тэц"><div><div class="co-name">Кемеровская ТЭЦ</div><div class="co-sub">АО «Кемеровская генерация»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="ново-кемеровская тэц"><div><div class="co-name">АО «Ново-Кемеровская ТЭЦ»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="барнаульская тэц-2"><div><div class="co-name">Барнаульская ТЭЦ-2</div><div class="co-sub">фил. АО «СГК-Алтай»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="барнаульская теплосетевая"><div><div class="co-name">Барнаульская теплосетевая компания</div><div class="co-sub">фил. АО «СГК-Алтай»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="рубцовский теплоэнергетический"><div><div class="co-name">Рубцовский теплоэнергетический комплекс</div><div class="co-sub">фил. АО «СГК-Алтай»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="барнаульская тэц-3"><div><div class="co-name">Барнаульская ТЭЦ-3</div><div class="co-sub">фил. АО «СГК-Алтай»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="бийскэнерго"><div><div class="co-name">Бийскэнерго</div><div class="co-sub">фил. АО «СГК-Алтай»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="бийскэнерготеплотранзит"><div><div class="co-name">БийскэнергоТеплоТранзит</div><div class="co-sub">фил. АО «СГК-Алтай»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="новосибирская тэц-2"><div><div class="co-name">Новосибирская ТЭЦ-2</div><div class="co-sub">ОП АО «СГК-Новосибирск»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="новосибирская тэц-3"><div><div class="co-name">Новосибирская ТЭЦ-3</div><div class="co-sub">ОП АО «СГК-Новосибирск»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="новосибирская тэц-4"><div><div class="co-name">Новосибирская ТЭЦ-4</div><div class="co-sub">ОП АО «СГК-Новосибирск»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="новосибирская тэц-5"><div><div class="co-name">Новосибирская ТЭЦ-5</div><div class="co-sub">ОП АО «СГК-Новосибирск»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="барабинская тэц"><div><div class="co-name">Барабинская ТЭЦ</div><div class="co-sub">ОП АО «СГК-Новосибирск»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="тепловые сети новосибирск"><div><div class="co-name">Тепловые сети</div><div class="co-sub">фил. АО «СГК-Новосибирск»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="новосибирская теплосетевая"><div><div class="co-name">ООО «Новосибирская теплосетевая компания»</div></div><span class="co-badge">500 тыс.</span></div>
+                <div class="co-card fz" data-n="энергетик"><div><div class="co-name">ООО «Энергетик»</div></div><span class="co-badge t100">100 тыс.</span></div>
+            </div>
+        </div>
+        <div id="tOther" class="tab-pane">
+            <div class="co-grid">
+                <div class="co-card nonfz" data-n="сгк головной"><div><div class="co-name">ООО «СГК» (Головной офис)</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="сибэр"><div><div class="co-name">АО «СИБЭР»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="сибирская теплосбытовая"><div><div class="co-name">ООО «Сибирская теплосбытовая компания»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="сиац"><div><div class="co-name">АО «Сибирский ИАЦ»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="бамовская"><div><div class="co-name">ООО «БАМовская ТЭС-1»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="сибирский бит"><div><div class="co-name">ООО «Сибирский БИТ»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="торнадо"><div><div class="co-name">ООО «Модульные Системы Торнадо»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="уралтэп"><div><div class="co-name">ООО «УралТЭП»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="уголь-инжиниринг"><div><div class="co-name">ООО «Уголь-инжиниринг»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+                <div class="co-card nonfz" data-n="сибпромрешения"><div><div class="co-name">ООО «СибПромРешения»</div></div><span class="co-badge">вне 223-ФЗ</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== СПОСОБЫ ===== -->
+<div class="sec" id="methods">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-purple"></div><div class="sec-name">Способы закупок по Стандарту СГК</div><div class="sec-tags"><span class="tag tag-purple">16 способов</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <div class="heading">Конкурентные способы (по 223-ФЗ)</div>
+        <table class="tbl"><thead><tr><th>Способ</th><th>Суть</th><th>Форматы</th></tr></thead><tbody>
+            <tr><td><strong>Конкурс</strong></td><td>Выбор лучшего предложения по совокупности критериев</td><td>Открытый, электронный, закрытый</td></tr>
+            <tr><td><strong>Аукцион</strong></td><td>Процедура снижения цены; побеждает наименьшая цена</td><td>Открытый, электронный, закрытый</td></tr>
+            <tr><td><strong>Запрос котировок (RFQ)</strong></td><td>Выбор по цене для стандартных МТР и услуг</td><td>Открытый, электронный, закрытый</td></tr>
+            <tr><td><strong>Запрос предложений (RFP)</strong></td><td>Выбор по совокупности критериев с техоценкой, переговорами</td><td>Открытый, электронный, закрытый</td></tr>
+        </tbody></table>
+        <div class="heading">Неконкурентные способы</div>
+        <table class="tbl"><thead><tr><th>Способ</th><th>Суть</th><th>Условия</th></tr></thead><tbody>
+            <tr><td><strong>Простая закупка</strong></td><td>Оплата по счёту или договорное письмо</td><td>До 100/500 тыс. руб.</td></tr>
+            <tr><td><strong>Закупка у ЕИ</strong></td><td>У единственного поставщика с обоснованием</td><td>Критерии п. 4.5.6, 4.5.8</td></tr>
+            <tr><td><strong>Маркетинговое исследование</strong></td><td>Сбор информации о рынке без обязательства</td><td>Невозможно определить все требования</td></tr>
+            <tr><td><strong>Отбор предложений</strong></td><td>Оценка с ограниченным кругом участников</td><td>ЭТП РОСЭЛТОРГ и ЕИС</td></tr>
+            <tr><td><strong>Электронный магазин</strong></td><td>Закупка у субъектов МСП через ЭТП</td><td>НМЦД до 20 млн руб.</td></tr>
+        </tbody></table>
+        <div class="heading">Специальные процедуры</div>
+        <table class="tbl"><thead><tr><th>Способ</th><th>Суть</th><th>Условия</th></tr></thead><tbody>
+            <tr><td><strong>Аварийная закупка</strong></td><td>Ускоренная закупка при ЧС, авариях</td><td>4 основания; ЕИС за 1 день</td></tr>
+            <tr><td><strong>Рамочный договор</strong></td><td>Повторные закупки по ранее заключённому договору</td><td>Через спецификации и заказы</td></tr>
+            <tr><td><strong>Внутригрупповая</strong></td><td>У компаний Группы СГК</td><td>Внутригрупповой поставщик</td></tr>
+            <tr><td><strong>Биржевые торги</strong></td><td>Закупка на торговых биржах</td><td>Специальные товарные категории</td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+<!-- ===== ПОРОГИ ===== -->
+<div class="sec" id="thresholds">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-orange"></div><div class="sec-name">Ценовые пороги и их последствия</div><div class="sec-tags"><span class="tag tag-orange">Пороги</span><span class="tag tag-accent">НМЦД</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <div class="thresh-bar">
+            <div class="thresh-seg" style="flex:1;background:var(--green);">До 100 тыс.<br>Оплата по счёту</div>
+            <div class="thresh-seg" style="flex:1.5;background:var(--orange);">100–500 тыс.<br>ЕИ (малые)</div>
+            <div class="thresh-seg" style="flex:3;background:var(--blue);">Свыше 500 тыс.<br>Конкурентные</div>
+            <div class="thresh-seg" style="flex:2;background:var(--purple);">Свыше 15 млн<br>RFP через ЕИС</div>
+        </div>
+        <div class="kps">
+            <div class="kp"><div class="kp-n" style="background:var(--green);">1</div><div class="kp-text"><strong>До 100 тыс. руб. с НДС</strong> — оплата по счёту без договора. Для компаний с выручкой менее 5 млрд руб.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--orange);">2</div><div class="kp-text"><strong>100–500 тыс. руб. с НДС</strong> — простая закупка или ЕИ. Итоги в УКП для отражения в ЕИС.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--blue);">3</div><div class="kp-text"><strong>Свыше 500 тыс. руб.</strong> — обязательно конкурентные процедуры. Исключение: обоснованная ЕИ.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--purple);">4</div><div class="kp-text"><strong>Свыше 15 млн руб.</strong> — RFP через ЭТП РОСЭЛТОРГ и ЕИС. МСП-закупки до 20 млн — электронный магазин.</div></div>
+        </div>
+        <div class="heading">Обеспечение заявки</div>
+        <table class="tbl"><thead><tr><th>НМЦД</th><th>Обеспечение заявки</th></tr></thead><tbody>
+            <tr><td>До 5 млн руб.</td><td><strong>Не устанавливается</strong></td></tr>
+            <tr><td>Свыше 5 млн руб.</td><td>До 5% от начальной цены</td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+<!-- ===== МАСТЕР-СХЕМА ===== -->
+<div class="sec" id="masterflow">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-accent"></div><div class="sec-name">Интерактивная схема выбора способа закупки</div><div class="sec-tags"><span class="tag tag-accent">Схема</span><span class="tag tag-blue">Кликабельно</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <p class="para">Нажмите на любой блок способа закупки, чтобы раскрыть детальный алгоритм.</p>
+        <div class="flow">
+            <div class="flow-node n-start">Потребность в закупке сформирована</div>
+            <div class="flow-arr"></div>
+            <div class="flow-node n-q">Какова сумма закупки?</div>
+            <div class="flow-arr"></div>
+            <div class="flow-row">
+                <div class="flow-col"><div class="flow-lbl">До 100 тыс.</div><div class="flow-node n-green" onclick="showD('simple')">Простая закупка</div></div>
+                <div class="flow-col"><div class="flow-lbl">100–500 тыс.</div><div class="flow-node n-purple" onclick="showD('sole-small')">ЕИ (малые) / Простая</div></div>
+                <div class="flow-col"><div class="flow-lbl">Свыше 500 тыс.</div><div class="flow-node n-blue" onclick="showD('competitive')">Конкурентная процедура</div></div>
+            </div>
+            <div class="flow-arr"></div>
+            <div class="flow-node n-q">Есть ли особые обстоятельства?</div>
+            <div class="flow-arr"></div>
+            <div class="flow-row">
+                <div class="flow-col"><div class="flow-lbl">Авария / ЧС</div><div class="flow-node n-red" onclick="showD('emergency')">Аварийная закупка</div></div>
+                <div class="flow-col"><div class="flow-lbl">Единственный поставщик</div><div class="flow-node n-purple" onclick="showD('sole')">Закупка у ЕИ</div></div>
+                <div class="flow-col"><div class="flow-lbl">Рамочный договор</div><div class="flow-node n-teal" onclick="showD('framework')">Рамочный договор</div></div>
+            </div>
+            <div class="flow-arr"></div>
+            <div class="flow-node n-q">Какой тип конкурентной процедуры?</div>
+            <div class="flow-arr"></div>
+            <div class="flow-row">
+                <div class="flow-col"><div class="flow-lbl">Стандартные МТР</div><div class="flow-node n-blue" onclick="showD('rfq')">Запрос цен (RFQ)</div></div>
+                <div class="flow-col"><div class="flow-lbl">Сложные закупки</div><div class="flow-node n-blue" onclick="showD('rfp')">Запрос предложений (RFP)</div></div>
+                <div class="flow-col"><div class="flow-lbl">МСП до 20 млн</div><div class="flow-node n-blue" onclick="showD('eshop')">Электронный магазин</div></div>
+            </div>
+        </div>
+
+        <!-- Detail panels -->
+        <div id="d-simple" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Простая закупка (до 100/500 тыс.)</div><button class="dpanel-x" onclick="hideD('simple')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Определение механизма</div><div class="step-d">Наличие КБК с лимитом? Если да — покупка по карте. Если нет — запрос счёта.</div><div class="step-who">Организатор закупки</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Получение счёта/предложения</div><div class="step-d">Достаточно одного счёта. При 100% оплате по факту — типовое договорное письмо или оплата по счёту (до 100 тыс. без договора).</div><div class="step-who">Организатор закупки</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Решение о закупке</div><div class="step-d">Согласование через СЭД или почту. Уполномоченный руководитель (без ЗКО).</div><div class="step-who">Уполномоченный руководитель</div></div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-body"><div class="step-t">Оформление и оплата</div><div class="step-d">Оплата по счёту или договорное письмо. Для малых компаний — итоги в УКП для ЕИС.</div><div class="step-who">Организатор закупки</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-sole-small" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">ЕИ для малых компаний (100–500 тыс.)</div><button class="dpanel-x" onclick="hideD('sole-small')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Формирование заявки</div><div class="step-d">Потребность, номенклатура, сроки.</div><div class="step-who">Инициатор</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Получение счёта</div><div class="step-d">Достаточно одного предложения.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Согласование</div><div class="step-d">Итоги → Организатор (Консультант) → УКП для ЕИС.</div><div class="step-who">Организатор / УКП</div></div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-body"><div class="step-t">Заключение договора</div><div class="step-d">После подтверждения от УКП — оформление.</div><div class="step-who">Организатор</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-competitive" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Конкурентная процедура (от 500 тыс.)</div><button class="dpanel-x" onclick="hideD('competitive')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Формирование заявки</div><div class="step-d">Инициатор: ТЗ, обоснование НМЦД, сроки, требования — в SAP.</div><div class="step-who">Инициатор</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Определение способа</div><div class="step-d">По критериям Приложения №4: тип продукции, сумма, сложность.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Согласование ЗКО</div><div class="step-d">Для закупок выше порога — согласование способа, ТЗ, НМЦД на комиссии.</div><div class="step-who">ЗКО</div></div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-body"><div class="step-t">Документация и публикация</div><div class="step-d">Извещение, ТЗ, форма ТКП, условия. Публикация в ЕИС и/или ЭТП.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">5</div><div class="step-body"><div class="step-t">Сбор и оценка</div><div class="step-d">Техоценка (Инициатор) → Коммерческая → ДКБ → Переговоры.</div><div class="step-who">Организатор + Инициатор + ДКБ</div></div></div>
+                <div class="step"><div class="step-n">6</div><div class="step-body"><div class="step-t">Определение победителя</div><div class="step-d">Решение ЗКО / УР → Договор → Публикация в ЕИС.</div><div class="step-who">ЗКО / УР</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-rfq" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Запрос цен (RFQ)</div><button class="dpanel-x" onclick="hideD('rfq')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Подготовка документов</div><div class="step-d">Извещение, форма ТКП, условия. ТЗ не требуется для RFQ.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Публикация и сбор ТКП</div><div class="step-d">В SRM (приоритетно) или вне SRM по согласованию.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Коммерческая проработка</div><div class="step-d">Оценка цен, смет. Проверка ДКБ. Переторжка при необходимости.</div><div class="step-who">Организатор + ДКБ</div></div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-body"><div class="step-t">Решение</div><div class="step-d">Победитель — наименьшая цена. Решение ЗКО/УР. Договор. ЕИС.</div><div class="step-who">ЗКО / УР</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-rfp" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Запрос предложений (RFP)</div><button class="dpanel-x" onclick="hideD('rfp')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Полный пакет документов</div><div class="step-d">Извещение, ТЗ, форма ТКП, условия, критерии оценки.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Публикация</div><div class="step-d">В ЕИС + РОСЭЛТОРГ (свыше 15 млн). SRM для прочих.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Техническая оценка</div><div class="step-d">Техчасть ТКП → Инициатор + эксперты → Техзаключение → Допуск.</div><div class="step-who">Инициатор + эксперты</div></div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-body"><div class="step-t">Коммерческая проработка</div><div class="step-d">Оценка допущенных, проверка смет, ДКБ, антикоррупционный анализ.</div><div class="step-who">Организатор + ДКБ</div></div></div>
+                <div class="step"><div class="step-n">5</div><div class="step-body"><div class="step-t">Переговоры</div><div class="step-d">Коммерческие переговоры, переторжка. Несколько итераций допускается.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">6</div><div class="step-body"><div class="step-t">Итоги</div><div class="step-d">Сравнительная таблица, обоснование. ЗКО / УР → Договор → ЕИС.</div><div class="step-who">ЗКО</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-emergency" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Аварийная закупка</div><button class="dpanel-x" onclick="hideD('emergency')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="callout callout-red" style="margin-bottom:.8rem;"><strong>4 основания:</strong> (1) ликвидация ЧС; (2) аварийная остановка оборудования; (3) выход из строя систем жизнеобеспечения; (4) форс-мажор (сырьё).<div class="callout-src">п. 4.6 Стандарта закупок</div></div>
+            <div class="steps">
+                <div class="step" style="border-left-color:var(--red);"><div class="step-n" style="background:var(--red);">1</div><div class="step-body"><div class="step-t">Аварийная заявка</div><div class="step-d">Любым способом: почта, SMS, бумага, СЭД. Параллельно — SAP.</div><div class="step-who">Инициатор</div></div></div>
+                <div class="step" style="border-left-color:var(--red);"><div class="step-n" style="background:var(--red);">2</div><div class="step-body"><div class="step-t">Обоснование</div><div class="step-d">Форма Приложения 10. Детали аварийной ситуации.</div><div class="step-who">Инициатор</div></div></div>
+                <div class="step" style="border-left-color:var(--red);"><div class="step-n" style="background:var(--red);">3</div><div class="step-body"><div class="step-t">Передача Организатору</div><div class="step-d">Заявка + обоснование + ТЗ.</div><div class="step-who">Инициатор → Организатор</div></div></div>
+                <div class="step" style="border-left-color:var(--red);"><div class="step-n" style="background:var(--red);">4</div><div class="step-body"><div class="step-t">Публикация в ЕИС</div><div class="step-d"><strong>В течение 1 рабочего дня.</strong> ДКБ + антикоррупционная экспертиза параллельно.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step" style="border-left-color:var(--red);"><div class="step-n" style="background:var(--red);">5</div><div class="step-body"><div class="step-t">Проведение и договор</div><div class="step-d">Ускоренный режим. Сокращение этапов и сроков допускается.</div><div class="step-who">Организатор</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-sole" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Закупка у единственного источника (ЕИ)</div><button class="dpanel-x" onclick="hideD('sole')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="heading">Основания для закупки у ЕИ</div>
+            <div class="kps" style="margin-bottom:.8rem;">
+                <div class="kp"><div class="kp-n" style="background:var(--nav-bg);">1</div><div class="kp-text">Исключительные права / отсутствие аналогов</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--nav-bg);">2</div><div class="kp-text">Аварийные и срочные ситуации</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--nav-bg);">3</div><div class="kp-text">Субъект естественной монополии</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--nav-bg);">4</div><div class="kp-text">Обслуживание оборудования по гарантии</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--nav-bg);">5</div><div class="kp-text">Результат неудачной конкурентной процедуры</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--nav-bg);">6</div><div class="kp-text">Услуги сетевой инфраструктуры по регулируемым тарифам</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--nav-bg);">7</div><div class="kp-text">Авторский контроль и надзор</div></div>
+            </div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Обоснование</div><div class="step-d">Ссылка на критерии п. 4.5.6 или п. 4.5.8 Стандарта.</div><div class="step-who">Инициатор</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Заявка Организатору</div><div class="step-d">Обоснование ЕИ + ТЗ + НМЦД + документы.</div><div class="step-who">Инициатор → Организатор</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Преддоговорные переговоры</div><div class="step-d">Стоимость может отличаться от НМЦД не более чем на 10% вниз.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-body"><div class="step-t">Согласование и договор</div><div class="step-d">Решение по Матрице полномочий. Договор. ЕИС.</div><div class="step-who">ЗКО / УР</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-framework" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Применение рамочного договора</div><button class="dpanel-x" onclick="hideD('framework')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="callout callout-accent" style="margin-bottom:.8rem;">Рамочный договор — результат ранее проведённой конкурентной процедуры. Цены и условия согласованы. Повторная процедура не требуется.</div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Проверка наличия</div><div class="step-d">Действующий рамочный договор, номенклатура, объём, сроки.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Заявка в SAP</div><div class="step-d">С привязкой к рамочному договору.</div><div class="step-who">Инициатор</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Спецификация/заказ</div><div class="step-d">Что, сколько, когда. На условиях рамочного договора.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">4</div><div class="step-body"><div class="step-t">Исполнение</div><div class="step-d">Поставка по условиям рамочного договора.</div><div class="step-who">Инициатор + Организатор</div></div></div>
+            </div>
+        </div>
+
+        <div id="d-eshop" class="dpanel"><div class="dpanel-head"><div class="dpanel-t">Электронный магазин (МСП)</div><button class="dpanel-x" onclick="hideD('eshop')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Размещение</div><div class="step-d">ЭТП РОСЭЛТОРГ для МСП. НМЦД до 20 млн руб.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Сбор предложений</div><div class="step-d">Открытая процедура, только МСП. Техоценка + коммерция.</div><div class="step-who">Организатор</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Выбор и договор</div><div class="step-d">По совокупности критериев. Переговоры при необходимости.</div><div class="step-who">Организатор</div></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== РОЛИ ===== -->
+<div class="sec" id="roles">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-blue"></div><div class="sec-name">Роли участников закупочного процесса</div><div class="sec-tags"><span class="tag tag-blue">6 ролей</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <div class="role-grid">
+            <div class="role"><div class="role-icon" style="background:var(--blue-soft);color:var(--blue);">&#9998;</div><div class="role-t">Инициатор закупки</div><div class="role-d">Формирует потребность: заявку, ТЗ, обоснование НМЦД. Проводит техническую оценку, составляет техзаключение. Принимает результат.</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--green-soft);color:var(--green);">&#9881;</div><div class="role-t">Организатор закупки</div><div class="role-d">Определяет способ, готовит документацию, публикует извещение, собирает ТКП, проводит коммерческую оценку, организует переговоры.</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--purple-soft);color:var(--purple);">&#9878;</div><div class="role-t">Консультант по закупкам</div><div class="role-d">Формирует НМЦД по централизованной номенклатуре. Запрос ТКП. Методологическая поддержка.</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--orange-soft);color:var(--orange);">&#128270;</div><div class="role-t">ДКБ</div><div class="role-d">Проверка благонадёжности контрагентов, антикоррупционная экспертиза, анализ рисков.</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--red-soft);color:var(--red);">&#9878;</div><div class="role-t">Уполномоченный руководитель</div><div class="role-d">Решения по закупкам, не требующим ЗКО. Утверждение простых закупок и закупок ниже порога.</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--accent-soft);color:var(--accent);">&#9733;</div><div class="role-t">ЗКО</div><div class="role-d">Коллегиальный контроль крупных закупок. Трёхуровневая система комиссий.</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ЗКО ===== -->
+<div class="sec" id="collegial">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-red"></div><div class="sec-name">Закупочные коллегиальные органы (ЗКО)</div><div class="sec-tags"><span class="tag tag-red">Контроль</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>Трёхуровневая система ЗКО</strong> обеспечивает коллегиальный контроль закупочных решений. Уровень определяется суммой и стратегической значимостью.</div>
+        <div class="heading">Уровни ЗКО</div>
+        <div class="kps">
+            <div class="kp" style="border-left:3px solid var(--red);background:var(--red-soft);"><div class="kp-n" style="background:var(--red);">I</div><div class="kp-text"><strong>Комиссия по закупкам крупных проектов (КЗ)</strong> — высший орган. Свыше 72 млн руб. с НДС, стратегические проекты.</div></div>
+            <div class="kp" style="border-left:3px solid var(--blue);background:var(--blue-soft);"><div class="kp-n" style="background:var(--blue);">II</div><div class="kp-text"><strong>Центральная закупочная комиссия (ЦЗК)</strong> — основной орган. Закупки среднего объёма.</div></div>
+            <div class="kp" style="border-left:3px solid var(--green);background:var(--green-soft);"><div class="kp-n" style="background:var(--green);">III</div><div class="kp-text"><strong>Иные органы нижних уровней</strong> — локальные решения филиалов, специальные закупки ниже порогов.</div></div>
+        </div>
+        <div class="heading">Функции ЗКО</div>
+        <div class="items">
+            <div class="item"><div class="item-dot"></div>Одобрение <strong>способа закупки</strong></div>
+            <div class="item"><div class="item-dot"></div>Одобрение <strong>технических требований</strong></div>
+            <div class="item"><div class="item-dot"></div>Согласование <strong>НМЦД</strong></div>
+            <div class="item"><div class="item-dot"></div>Утверждение <strong>итогов процедуры</strong> и выбора победителя</div>
+            <div class="item"><div class="item-dot"></div>Контроль <strong>соответствия</strong> Стандарту и Положению</div>
+        </div>
+        <div class="heading">Форматы заседаний</div>
+        <table class="tbl"><thead><tr><th>Формат</th><th>Описание</th></tr></thead><tbody>
+            <tr><td><strong>Очное</strong></td><td>Личное присутствие членов</td></tr>
+            <tr><td><strong>Заочное</strong></td><td>Опросные листы, голосование без присутствия</td></tr>
+            <tr><td><strong>Электронное</strong></td><td>Через систему электронного документооборота</td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+<!-- ===== НМЦД ===== -->
+<div class="sec" id="nmcd">
+    <div class="sec-head" onclick="toggle(this)">
+        <div class="sec-left"><div class="sec-dot c-teal"></div><div class="sec-name">НМЦД: начальная максимальная цена договора</div><div class="sec-tags"><span class="tag tag-teal">Цена</span></div></div>
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>НМЦД</strong> — максимальная сумма, которая может быть затрачена на закупку. Формируется ДО проведения процедуры. Ключевой параметр для определения способа и уровня согласования.</div>
+        <div class="heading">Способы определения НМЦД</div>
+        <div class="tabs">
+            <button class="tab on" onclick="swTab(this,'tPlan')">Плановые цены</button>
+            <button class="tab" onclick="swTab(this,'tMarket')">Анализ рынка</button>
+        </div>
+        <div id="tPlan" class="tab-pane on">
+            <div class="kps">
+                <div class="kp"><div class="kp-n" style="background:var(--teal);">1</div><div class="kp-text">Использование плановых цен из Методики (Приложение 2)</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--teal);">2</div><div class="kp-text">Консультант или Организатор формирует НМЦД напрямую</div></div>
+                <div class="kp"><div class="kp-n" style="background:var(--teal);">3</div><div class="kp-text">Для номенклатуры с учётом плановых цен в системе</div></div>
+            </div>
+        </div>
+        <div id="tMarket" class="tab-pane">
+            <div class="heading">Метод сопоставимых рыночных цен</div>
+            <div class="steps">
+                <div class="step"><div class="step-n">1</div><div class="step-body"><div class="step-t">Запрос ТКП</div><div class="step-d"><strong>Минимум двум контрагентам.</strong> Фирменный бланк, подпись, печать, дата не ранее 3 мес.</div></div></div>
+                <div class="step"><div class="step-n">2</div><div class="step-body"><div class="step-t">Анализ ТКП</div><div class="step-d">На основе предложений формируется НМЦД. Учёт условий, сроков, качества.</div></div></div>
+                <div class="step"><div class="step-n">3</div><div class="step-body"><div class="step-t">Утверждение</div><div class="step-d">Организатор принимает решение. Для централизованной номенклатуры — Консультант.</div></div></div>
+            </div>
+        </div>
+        <div class="heading" style="margin-top:1rem;">Ответственность</div>
+        <table class="tbl"><thead><tr><th>Номенклатура</th><th>Ответственный</th></tr></thead><tbody>
+            <tr><td>Централизованная</td><td><strong>Консультант по закупкам</strong></td></tr>
+            <tr><td>Децентрализованная</td><td><strong>Организатор в Компании Общества</strong></td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+    </div><!-- /content -->
+</div><!-- /main-wrap -->
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+</button>
+
+<script>
+function toggle(h){h.closest('.sec').classList.toggle('open');}
+function expandAll(){document.querySelectorAll('.sec').forEach(s=>s.classList.add('open'));}
+function collapseAll(){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('open'));document.querySelectorAll('.dpanel').forEach(p=>p.classList.remove('vis'));}
+function goTo(id){
+    const el=document.getElementById(id);if(!el)return;
+    el.classList.add('open');
+    const top=el.getBoundingClientRect().top+window.pageYOffset-60;
+    window.scrollTo({top,behavior:'smooth'});
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    event.target.closest('.nav-item')?.classList.add('active');
+    closeSidebar();
+}
+function showD(id){document.querySelectorAll('.dpanel').forEach(p=>p.classList.remove('vis'));const p=document.getElementById('d-'+id);if(p){p.classList.add('vis');setTimeout(()=>{const t=p.getBoundingClientRect().top+window.pageYOffset-70;window.scrollTo({top:t,behavior:'smooth'});},100);}}
+function hideD(id){const p=document.getElementById('d-'+id);if(p)p.classList.remove('vis');}
+function swTab(btn,id){const c=btn.closest('.sec-body');c.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));c.querySelectorAll('.tab-pane').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById(id)?.classList.add('on');}
+function filterCo(){const q=document.getElementById('companySearch').value.toLowerCase();document.querySelectorAll('.co-card').forEach(c=>{const n=c.getAttribute('data-n')||'';const t=c.textContent.toLowerCase();c.style.display=(n.includes(q)||t.includes(q))?'':'none';});}
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+window.addEventListener('scroll',()=>{const b=document.querySelector('.scroll-top');b.classList.toggle('vis',window.pageYOffset>300);});
+window.addEventListener('scroll',()=>{const secs=document.querySelectorAll('.sec');const items=document.querySelectorAll('.nav-item');let cur='';secs.forEach(s=>{if(window.pageYOffset>=s.offsetTop-80)cur=s.id;});items.forEach(i=>{i.classList.remove('active');if(i.getAttribute('onclick')?.includes(cur))i.classList.add('active');});});
+
+/* PWA: Generate icon and register service worker */
+(function(){
+    /* Generate 192x192 PNG icon for PWA */
+    var c=document.createElement('canvas');c.width=192;c.height=192;
+    var x=c.getContext('2d');
+    x.fillStyle='#0f1729';x.beginPath();x.roundRect(0,0,192,192,[40]);x.fill();
+    x.font='bold 72px Inter,system-ui,sans-serif';x.textAlign='center';x.textBaseline='middle';
+    x.fillStyle='#f5a623';x.fillText('223',96,86);
+    x.font='bold 28px Inter,system-ui,sans-serif';x.fillStyle='rgba(255,255,255,.7)';x.fillText('ФЗ',96,132);
+    var iconURL=c.toDataURL('image/png');
+    /* Set apple-touch-icon dynamically */
+    var link=document.querySelector('link[rel="apple-touch-icon"]');
+    if(link)link.href=iconURL;
+    /* Create manifest blob with icon */
+    var manifest={
+        name:'223-ФЗ Обучение',
+        short_name:'223-ФЗ',
+        start_url:location.href,
+        display:'standalone',
+        background_color:'#0f1729',
+        theme_color:'#0f1729',
+        orientation:'any',
+        icons:[{src:iconURL,sizes:'192x192',type:'image/png'}]
+    };
+    var blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});
+    var manifestLink=document.querySelector('link[rel="manifest"]');
+    if(manifestLink)manifestLink.href=URL.createObjectURL(blob);
+    /* Register a minimal service worker for offline caching */
+    if('serviceWorker' in navigator){
+        var swCode='var CACHE="fz223-v1";self.addEventListener("install",function(e){e.waitUntil(caches.open(CACHE).then(function(c){return c.addAll(["./"])}))});self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request)}))})';
+        var swBlob=new Blob([swCode],{type:'application/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(function(){});
+    }
+})();
+</script>
+</body>
+</html>

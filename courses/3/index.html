@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="План закупок">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0f1729">
+    <meta name="description" content="Интерактивный обучающий ресурс по планированию закупок для сотрудников группы СГК">
+    <title>Планирование закупок | Обучающий ресурс</title>
+    <link rel="manifest" href="data:application/json;charset=utf-8,%7B%7D">
+    <link rel="apple-touch-icon" href="data:,">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+:root {
+    --nav-bg: #0f1729;
+    --nav-hover: #1a2744;
+    --nav-active: #1a2a20;
+    --accent: #2d8659;
+    --accent-hover: #247048;
+    --accent-soft: rgba(45,134,89,.1);
+    --accent-softer: rgba(45,134,89,.06);
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1a1d26;
+    --text-2: #4a5068;
+    --text-3: #8890a4;
+    --border: #e2e5eb;
+    --border-light: #eef0f4;
+    --blue: #3b82f6;
+    --blue-soft: rgba(59,130,246,.08);
+    --green: #10b981;
+    --green-soft: rgba(16,185,129,.08);
+    --red: #ef4444;
+    --red-soft: rgba(239,68,68,.08);
+    --purple: #8b5cf6;
+    --purple-soft: rgba(139,92,246,.08);
+    --orange: #f97316;
+    --orange-soft: rgba(249,115,22,.08);
+    --teal: #14b8a6;
+    --teal-soft: rgba(20,184,166,.08);
+    --amber: #f59e0b;
+    --amber-soft: rgba(245,158,11,.08);
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.06);
+    --shadow: 0 2px 8px rgba(0,0,0,.08);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;}
+.sidebar{width:290px;background:var(--nav-bg);color:#fff;position:fixed;top:0;left:0;bottom:0;z-index:200;display:flex;flex-direction:column;overflow-y:auto;transition:transform .3s;}
+.sidebar-header{padding:1.25rem 1.3rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.logo{display:flex;align-items:center;gap:.7rem;}
+.logo-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(45,134,89,.12);padding:3px;}
+.logo-icon svg{width:34px;height:34px;}
+.logo-text{font-family:Georgia,'Times New Roman',serif;font-size:1.25rem;font-weight:700;letter-spacing:-.3px;}
+.logo-text .snab{color:#fff;}
+.logo-text .chat{color:var(--accent);}
+.logo-sub{font-size:.62rem;color:var(--text-3);margin-top:2px;letter-spacing:.4px;text-transform:uppercase;}
+.sidebar-nav{flex:1;padding:.75rem 0;}
+.nav-group{margin-bottom:.5rem;}
+.nav-group-label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:rgba(255,255,255,.3);padding:.5rem 1.3rem .3rem;}
+.nav-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1.3rem;color:rgba(255,255,255,.6);font-size:.84rem;font-weight:500;cursor:pointer;transition:all .15s;border-left:3px solid transparent;text-decoration:none;}
+.nav-item:hover{background:var(--nav-hover);color:rgba(255,255,255,.9);}
+.nav-item.active{background:var(--nav-active);color:#fff;border-left-color:var(--accent);}
+.nav-item svg{width:16px;height:16px;flex-shrink:0;opacity:.6;}
+.nav-item:hover svg{opacity:.8;}
+.nav-item.active svg{opacity:1;color:var(--accent);}
+.nav-item .tag-count{margin-left:auto;background:rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-size:.6rem;padding:.1rem .4rem;border-radius:10px;font-weight:600;}
+.nav-item.active .tag-count{background:var(--accent-soft);color:var(--accent);}
+.sidebar-footer{padding:1rem 1.3rem;border-top:1px solid rgba(255,255,255,.08);font-size:.65rem;color:rgba(255,255,255,.25);text-align:center;line-height:1.4;}
+.series-badge{display:inline-block;font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:.15rem .45rem;border-radius:3px;background:var(--accent-soft);color:var(--accent);margin-bottom:.5rem;}
+.main-wrap{margin-left:290px;flex:1;min-height:100vh;display:flex;flex-direction:column;}
+.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-title{font-size:.95rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:.5rem;}
+.topbar-title .badge{background:var(--accent-soft);color:var(--accent);font-size:.6rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;letter-spacing:.3px;}
+.topbar-right{display:flex;align-items:center;gap:.75rem;}
+.topbar-btn{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.4rem .8rem;font-size:.75rem;font-weight:500;color:var(--text-2);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:.3rem;}
+.topbar-btn:hover{border-color:var(--accent);color:var(--accent);}
+.topbar-btn svg{width:14px;height:14px;}
+.burger{display:none;width:36px;height:36px;border:none;background:none;color:var(--text);cursor:pointer;align-items:center;justify-content:center;border-radius:var(--radius-sm);}
+.burger svg{width:22px;height:22px;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:150;}
+.content{flex:1;padding:1.5rem 2.5rem;max-width:1200px;}
+.sec{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden;box-shadow:var(--shadow-sm);}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.2rem;cursor:pointer;transition:background .15s;user-select:none;}
+.sec-head:hover{background:var(--bg);}
+.sec-left{display:flex;align-items:center;gap:.7rem;}
+.sec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sec-dot.c-blue{background:var(--blue);}
+.sec-dot.c-green{background:var(--green);}
+.sec-dot.c-purple{background:var(--purple);}
+.sec-dot.c-orange{background:var(--orange);}
+.sec-dot.c-red{background:var(--red);}
+.sec-dot.c-teal{background:var(--teal);}
+.sec-dot.c-accent{background:var(--accent);}
+.sec-dot.c-amber{background:var(--amber);}
+.sec-name{font-size:.88rem;font-weight:600;color:var(--text);}
+.sec-tags{display:flex;gap:.35rem;margin-left:.5rem;}
+.tag{font-size:.58rem;font-weight:600;padding:.15rem .4rem;border-radius:3px;text-transform:uppercase;letter-spacing:.3px;}
+.tag-blue{background:var(--blue-soft);color:var(--blue);}
+.tag-green{background:var(--green-soft);color:var(--green);}
+.tag-red{background:var(--red-soft);color:var(--red);}
+.tag-purple{background:var(--purple-soft);color:var(--purple);}
+.tag-orange{background:var(--orange-soft);color:var(--orange);}
+.tag-teal{background:var(--teal-soft);color:var(--teal);}
+.tag-accent{background:var(--accent-soft);color:var(--accent);}
+.tag-amber{background:var(--amber-soft);color:var(--amber);}
+.chevron{width:18px;height:18px;color:var(--text-3);transition:transform .2s;flex-shrink:0;}
+.sec.open .chevron{transform:rotate(180deg);}
+.sec-body{display:none;padding:1rem 1.2rem 1.2rem;border-top:1px solid var(--border-light);}
+.sec.open .sec-body{display:block;}
+.heading{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--accent);margin:1rem 0 .5rem;padding-bottom:.3rem;border-bottom:1px solid var(--border-light);}
+.para{font-size:.84rem;color:var(--text-2);margin-bottom:.75rem;line-height:1.7;}
+.callout{padding:.75rem 1rem;border-radius:var(--radius-sm);font-size:.82rem;line-height:1.6;margin-bottom:.75rem;border-left:3px solid;}
+.callout-accent{background:var(--accent-softer);border-color:var(--accent);color:var(--text);}
+.callout-blue{background:var(--blue-soft);border-color:var(--blue);color:var(--text);}
+.callout-red{background:var(--red-soft);border-color:var(--red);color:var(--text);}
+.callout-green{background:var(--green-soft);border-color:var(--green);color:var(--text);}
+.callout-src{font-size:.68rem;color:var(--text-3);margin-top:.3rem;}
+.items{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.75rem;}
+.item{display:flex;align-items:baseline;gap:.5rem;font-size:.82rem;color:var(--text-2);line-height:1.5;}
+.item-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:.45rem;}
+.kps{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.75rem;}
+.kp{display:flex;align-items:flex-start;gap:.65rem;background:var(--bg);padding:.6rem .75rem;border-radius:var(--radius-sm);font-size:.82rem;line-height:1.5;border:1px solid var(--border-light);}
+.kp-n{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700;flex-shrink:0;}
+.kp-text{flex:1;color:var(--text-2);}
+.tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin-bottom:.75rem;}
+.tbl th{background:var(--bg);font-weight:600;text-align:left;padding:.5rem .65rem;border:1px solid var(--border);font-size:.72rem;text-transform:uppercase;letter-spacing:.3px;color:var(--text-2);}
+.tbl td{padding:.5rem .65rem;border:1px solid var(--border-light);color:var(--text-2);}
+.tbl tr:hover td{background:var(--accent-softer);}
+.tabs{display:flex;gap:.35rem;margin-bottom:.75rem;flex-wrap:wrap;}
+.tab{padding:.4rem .75rem;border-radius:var(--radius-sm);font-size:.75rem;font-weight:600;border:1px solid var(--border);background:var(--card);color:var(--text-2);cursor:pointer;transition:all .15s;}
+.tab.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.tab-pane{display:none;}
+.tab-pane.on{display:block;}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.5rem;}
+.role{background:var(--bg);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:.75rem;transition:border-color .15s;}
+.role:hover{border-color:var(--accent);}
+.role-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:.4rem;}
+.role-t{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.25rem;}
+.role-d{font-size:.76rem;color:var(--text-2);line-height:1.5;}
+/* Timeline */
+.timeline{position:relative;padding-left:1.5rem;margin:.75rem 0;}
+.timeline::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:.75rem;}
+.tl-item::before{content:'';position:absolute;left:-1.15rem;top:.45rem;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--card);}
+.tl-date{font-size:.68rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.3px;}
+.tl-text{font-size:.8rem;color:var(--text-2);margin-top:.1rem;line-height:1.5;}
+/* Flow */
+.flow{display:flex;flex-direction:column;align-items:center;gap:.3rem;margin:.75rem 0;}
+.flow-node{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.5rem 1rem;font-size:.8rem;font-weight:600;text-align:center;max-width:280px;transition:all .15s;}
+.flow-node.n-start{background:var(--nav-bg);color:#fff;border-color:var(--nav-bg);}
+.flow-node.n-q{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:700;font-size:.75rem;}
+.flow-node.n-green{background:var(--green-soft);border-color:var(--green);color:var(--green);}
+.flow-node.n-blue{background:var(--blue-soft);border-color:var(--blue);color:var(--blue);}
+.flow-node.n-purple{background:var(--purple-soft);border-color:var(--purple);color:var(--purple);}
+.flow-node.n-red{background:var(--red-soft);border-color:var(--red);color:var(--red);}
+.flow-node.n-teal{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);}
+.flow-node.n-amber{background:var(--amber-soft);border-color:var(--amber);color:var(--amber);}
+.flow-arr{width:2px;height:18px;background:var(--border);position:relative;}
+.flow-arr::after{content:'';position:absolute;bottom:-3px;left:-3px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--border);}
+.flow-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.flow-col{display:flex;flex-direction:column;align-items:center;gap:.25rem;}
+.flow-lbl{font-size:.62rem;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.3px;text-align:center;}
+.scroll-top{position:fixed;bottom:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);opacity:0;transition:opacity .2s;z-index:100;}
+.scroll-top.vis{opacity:1;}
+.scroll-top svg{width:18px;height:18px;}
+/* Tablet */
+@media(max-width:1024px){.sidebar{width:260px;}.main-wrap{margin-left:260px;}.content{max-width:100%;padding:1.2rem 1.5rem;}}
+/* Mobile */
+@media(max-width:768px){.sidebar{transform:translateX(-100%);width:290px;}.sidebar.open{transform:translateX(0);}.overlay.open{display:block;}.main-wrap{margin-left:0;}.burger{display:flex;}.content{padding:1rem .75rem;}.topbar{padding:.6rem 1rem;}.sec-head{padding:.75rem 1rem;min-height:48px;}.sec-body{padding:1rem;}.nav-item{padding:.7rem 1.3rem;min-height:44px;}.flow-row{flex-direction:column;align-items:center;}.role-grid{grid-template-columns:1fr;}.tbl{font-size:.75rem;}.tbl th,.tbl td{padding:.45rem .5rem;}.scroll-top{bottom:1rem;right:1rem;width:44px;height:44px;}.kps{gap:.4rem;}.kp{padding:.55rem .65rem;}body{padding-bottom:env(safe-area-inset-bottom);}}
+@media(max-width:400px){.content{padding:.75rem .5rem;}.sec-head{padding:.65rem .75rem;}.sec-body{padding:.75rem;}.sec-name{font-size:.82rem;}.tag{font-size:.52rem;}.topbar-title{font-size:.85rem;}}
+    </style>
+</head>
+<body>
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="120" y="100" width="200" height="260" rx="28" fill="#1a5235"/>
+                    <rect x="160" y="140" width="200" height="260" rx="28" fill="#247048"/>
+                    <rect x="200" y="180" width="200" height="260" rx="28" fill="#2d8659"/>
+                    <rect x="328" y="368" width="52" height="40" rx="12" fill="#fff"/>
+                    <polygon points="338,408 328,424 348,408" fill="#fff"/>
+                </svg>
+            </div>
+            <div>
+                <div class="logo-text"><span class="snab">Снаб</span><span class="chat">Чат</span></div>
+                <div class="logo-sub">Дирекция по ресурсному обеспечению</div>
+            </div>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-group">
+            <div class="nav-group-label">Серия курсов · Планирование закупок</div>
+            <a class="nav-item active" onclick="goTo('intro')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Введение</a>
+            <a class="nav-item" onclick="goTo('needs')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Виды потребностей<span class="tag-count">10</span></a>
+            <a class="nav-item" onclick="goTo('cycles')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Циклы планирования</a>
+            <a class="nav-item" onclick="goTo('deadlines')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Дедлайны</a>
+            <a class="nav-item" onclick="goTo('roles')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Роли<span class="tag-count">5</span></a>
+            <a class="nav-item" onclick="goTo('sap')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>SAP-коды заявок<span class="tag-count">6</span></a>
+            <a class="nav-item" onclick="goTo('leadtime')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Нормативные сроки</a>
+            <a class="nav-item" onclick="goTo('corrections')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>Корректировки</a>
+            <a class="nav-item" onclick="goTo('pricing')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>Плановые цены</a>
+        </div>
+    </nav>
+    <div class="sidebar-footer"><div class="series-badge">Курс 3 из серии</div><br>Дирекция по ресурсному обеспечению · 2026<br>Разработка @Кирилл Трубицын</div>
+</aside>
+
+<div class="main-wrap">
+    <div class="topbar">
+        <div style="display:flex;align-items:center;gap:.75rem;">
+            <a href="/" style="display:flex;align-items:center;gap:.3rem;color:var(--text-3);text-decoration:none;font-size:.75rem;font-weight:500;margin-right:.5rem;transition:color .15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-3)'"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>Academy</a>
+            <button class="burger" onclick="openSidebar()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            <div class="topbar-title">Планирование закупок: Обучающий ресурс <span class="badge">ИНТЕРАКТИВ</span></div>
+        </div>
+        <div class="topbar-right">
+            <button class="topbar-btn" onclick="expandAll()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg> Развернуть</button>
+            <button class="topbar-btn" onclick="collapseAll()"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg> Свернуть</button>
+        </div>
+    </div>
+    <div class="content">
+
+<!-- ВВЕДЕНИЕ -->
+<div class="sec open" id="intro">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-accent"></div><div class="sec-name">Введение: зачем планировать закупки</div><div class="sec-tags"><span class="tag tag-accent">Основы</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>Стандарт планирования закупок товаров (работ, услуг)</strong> — ред. 1.0. Процесс В5 «Материально-техническое обеспечение». Владелец процесса: Директор по закупкам. Утверждён Приказом ГО-121 от 28.06.2024.</div>
+        <div class="heading">Цель стандарта</div>
+        <div class="kps">
+            <div class="kp"><div class="kp-n" style="background:var(--accent);">1</div><div class="kp-text"><strong>Своевременность.</strong> Потребности должны быть выявлены заблаговременно, чтобы закупочные процедуры прошли в нормативные сроки.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--accent);">2</div><div class="kp-text"><strong>Консолидация.</strong> Объединение потребностей по категориям для снижения стоимости и повышения конкурентности.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--accent);">3</div><div class="kp-text"><strong>Прозрачность.</strong> Размещение плана закупок в ЕИС (для компаний по 223-ФЗ) в установленные сроки.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--accent);">4</div><div class="kp-text"><strong>Контроль.</strong> Снижение доли внеплановых и срочных закупок через качественное планирование.</div></div>
+        </div>
+        <div class="heading">На кого распространяется</div>
+        <div class="callout callout-blue"><strong>ООО СГК</strong>, Компании Общества (дочерние), компании на агентских договорах, все структурные подразделения. Для компаний по 223-ФЗ обязательна публикация плана закупок в ЕИС.<div class="callout-src">п. 1.2 Стандарта планирования закупок ред. 1.0</div></div>
+        <div class="heading">Нормативная база</div>
+        <table class="tbl"><thead><tr><th>Документ</th><th>Содержание</th></tr></thead><tbody>
+            <tr><td><strong>ФЗ-223 от 18.07.2011</strong></td><td>Требования к планированию и размещению планов закупок в ЕИС</td></tr>
+            <tr><td>ПП РФ № 932 от 17.09.2012</td><td>Правила формирования плана закупки и требования к форме</td></tr>
+            <tr><td>ПП РФ № 908 от 10.09.2012</td><td>Размещение информации о закупке на официальном сайте</td></tr>
+            <tr><td>ПП РФ № 1352 от 11.12.2014</td><td>Квоты МСП: минимум 50%, сроки 60 рабочих дней для МСП-процедур</td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+<!-- ВИДЫ ПОТРЕБНОСТЕЙ -->
+<div class="sec" id="needs">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-blue"></div><div class="sec-name">Виды потребностей</div><div class="sec-tags"><span class="tag tag-blue">10 типов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <div class="heading">Основные категории</div>
+        <div class="kps">
+            <div class="kp" style="border-left:3px solid var(--accent);"><div class="kp-n" style="background:var(--accent);">1</div><div class="kp-text"><strong>Прогнозная потребность.</strong> Без утверждённых планов, может не иметь финансового покрытия. Организатор определяет на основе данных за 12+ месяцев. Используется для консолидации и категорийных стратегий.</div></div>
+            <div class="kp" style="border-left:3px solid var(--green);"><div class="kp-n" style="background:var(--green);">2</div><div class="kp-text"><strong>Плановая потребность.</strong> На основе утверждённых планов и программ. Финансово обеспечена. При превышении нормативного срока присваивается признак «срочная».</div></div>
+        </div>
+        <div class="heading">По виду деятельности</div>
+        <table class="tbl"><thead><tr><th>Вид</th><th>Горизонт</th><th>Основание</th></tr></thead><tbody>
+            <tr><td><strong>Инвестиционная деятельность</strong></td><td>Период реализации проекта</td><td>Календарно-сетевой график проекта</td></tr>
+            <tr><td><strong>ДПМ (долгосрочное плановое обслуживание)</strong></td><td>По программе обслуживания</td><td>Программы обслуживания оборудования</td></tr>
+            <tr><td><strong>Техобслуживание и ремонт</strong></td><td>По ремонтным программам</td><td>Программы ТОиР оборудования</td></tr>
+            <tr><td><strong>Текущая и производственная</strong></td><td>Операционный период</td><td>Ежедневные производственные потребности</td></tr>
+            <tr><td><strong>Аварийная потребность</strong></td><td>Немедленно</td><td>Дефектные акты, предписания надзорных органов</td></tr>
+        </tbody></table>
+        <div class="heading">Управление запасами</div>
+        <div class="kps">
+            <div class="kp"><div class="kp-n" style="background:var(--red);">АЗ</div><div class="kp-text"><strong>Аварийный запас</strong> — резерв на случай аварийных ситуаций.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--orange);">СЗ</div><div class="kp-text"><strong>Страховой запас</strong> — буферный запас для обеспечения бесперебойности.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--blue);">ТЗ</div><div class="kp-text"><strong>Точка заказа</strong> — автоматический триггер повторного заказа при достижении порогового уровня.</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ЦИКЛЫ ПЛАНИРОВАНИЯ -->
+<div class="sec" id="cycles">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-green"></div><div class="sec-name">Циклы планирования</div><div class="sec-tags"><span class="tag tag-green">5 циклов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <table class="tbl"><thead><tr><th>Цикл</th><th>Период</th><th>Ключевые действия</th></tr></thead><tbody>
+            <tr><td><strong>Годовой</strong></td><td>Календарный год</td><td>Формирование плана закупок, публикация в ЕИС (до 31 декабря)</td></tr>
+            <tr><td><strong>Полугодовой</strong></td><td>6 месяцев</td><td>Консолидация потребностей, корректировка планов</td></tr>
+            <tr><td><strong>Квартальный</strong></td><td>3 месяца</td><td>Квартальная консолидация, уточнение сроков и объёмов</td></tr>
+            <tr><td><strong>Месячный</strong></td><td>1 месяц</td><td>Корректировки потребностей (10-е число каждого месяца)</td></tr>
+            <tr><td><strong>Внеплановый</strong></td><td>По факту</td><td>Когда нормативный срок &gt; (дата потребности − дата создания заявки)</td></tr>
+        </tbody></table>
+        <div class="heading">Заявочные кампании (Приложение 4)</div>
+        <div class="callout callout-accent">Заявочные кампании — регулярные периоды приёма потребностей от Инициаторов. Сроки кампаний определяются по категориям и источникам финансирования: инвестиционные, ремонтные, текущие, прогнозные.</div>
+    </div>
+</div>
+
+<!-- ДЕДЛАЙНЫ -->
+<div class="sec" id="deadlines">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-red"></div><div class="sec-name">Критические дедлайны</div><div class="sec-tags"><span class="tag tag-red">Сроки</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <div class="heading">Годовой календарь</div>
+        <div class="timeline">
+            <div class="tl-item"><div class="tl-date">31 июля</div><div class="tl-text">Формирование потребности в товарах с нормативным сроком поставки <strong>более 150 дней</strong></div></div>
+            <div class="tl-item"><div class="tl-date">31 августа</div><div class="tl-text">Формирование годовой потребности в товарах со сроком поставки <strong>до 150 дней</strong></div></div>
+            <div class="tl-item"><div class="tl-date">30 ноября</div><div class="tl-text">Формирование потребности в <strong>работах и услугах</strong> на следующий год</div></div>
+            <div class="tl-item"><div class="tl-date">31 декабря</div><div class="tl-text">Публикация годового плана закупок в <strong>ЕИС</strong> (не позднее 10 дней с утверждения)</div></div>
+        </div>
+        <div class="heading">Операционные сроки</div>
+        <table class="tbl"><thead><tr><th>Срок</th><th>Действие</th></tr></thead><tbody>
+            <tr><td><strong>1–10 число каждого месяца</strong></td><td>Период корректировок потребностей</td></tr>
+            <tr><td><strong>5 рабочих дней</strong></td><td>Инициатор уведомляет Организатора о предписаниях надзорных органов</td></tr>
+            <tr><td><strong>14 дней</strong></td><td>Подача заявки на закупку после получения предписания</td></tr>
+            <tr><td><strong>30 календарных дней</strong></td><td>Формирование плана закупок после получения прогнозной потребности</td></tr>
+            <tr><td><strong>45 рабочих дней</strong></td><td>До подписания договора — стандартная процедура</td></tr>
+            <tr><td><strong>60 рабочих дней</strong></td><td>До подписания договора — процедуры только для МСП</td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+<!-- РОЛИ -->
+<div class="sec" id="roles">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-purple"></div><div class="sec-name">Роли в планировании закупок</div><div class="sec-tags"><span class="tag tag-purple">5 ролей</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <div class="role-grid">
+            <div class="role"><div class="role-icon" style="background:var(--accent-soft);color:var(--accent);">&#9881;</div><div class="role-t">Организатор закупки</div><div class="role-d">Ведение нормативных сроков поставки. Обеспечение плановых цен в SAP ERP. Формирование планов закупок в течение 30 дней. Публикация в ЕИС (10 дней с утверждения). Ежемесячная корректировка (10-е число).</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--blue-soft);color:var(--blue);">&#9998;</div><div class="role-t">Инициатор закупки</div><div class="role-d">Формирование и согласование потребностей с техническими и финансовыми службами. Актуализация данных в SAP ERP. Обоснование срочности и ЕИ. Уведомление о предписаниях (5 рабочих дней). Подача заявок (14 дней).</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--green-soft);color:var(--green);">&#128176;</div><div class="role-t">Финансово-экономическая служба</div><div class="role-d">Согласование финансовых аспектов потребностей. Проверка бюджетных лимитов и закупочных лимитов.</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--orange-soft);color:var(--orange);">&#128295;</div><div class="role-t">Технические подразделения</div><div class="role-d">Согласование технических аспектов. Участие в кросс-функциональных группах (КФГ). Техническая экспертиза потребностей.</div></div>
+            <div class="role"><div class="role-icon" style="background:var(--purple-soft);color:var(--purple);">&#128101;</div><div class="role-t">Кросс-функциональные группы (КФГ)</div><div class="role-d">Рабочие группы для согласования сложных потребностей. Представители разных подразделений. Формируются ad-hoc.</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- SAP-КОДЫ -->
+<div class="sec" id="sap">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-teal"></div><div class="sec-name">SAP-коды типов заявок</div><div class="sec-tags"><span class="tag tag-teal">SAP ERP</span><span class="tag tag-blue">6 кодов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <table class="tbl"><thead><tr><th>Код</th><th>Вид</th><th>Модуль SAP</th><th>Источник</th></tr></thead><tbody>
+            <tr><td><strong>ZI / ZG</strong></td><td>Инвестиционная деятельность</td><td>PS (ZI) / альтернативный (ZG)</td><td>Проектные программы</td></tr>
+            <tr><td><strong>ZR</strong></td><td>Ремонт и техобслуживание</td><td>TORO</td><td>Ремонтные программы</td></tr>
+            <tr><td><strong>ZT</strong></td><td>Текущая/производственная</td><td>MM</td><td>Операционные потребности</td></tr>
+            <tr><td><strong>ZW</strong></td><td>Аварийная</td><td>MM</td><td>Дефектные акты, аварии</td></tr>
+            <tr><td><strong>ZA</strong></td><td>Самозакупка</td><td>MM</td><td>Самостоятельные закупки подразделений</td></tr>
+            <tr><td><strong>Z5</strong></td><td>Аварийный запас</td><td>MM</td><td>Формирование резервов</td></tr>
+        </tbody></table>
+        <div class="heading">Матрица классификации заявок (Приложение 6)</div>
+        <table class="tbl"><thead><tr><th>Источник / Финансирование</th><th>Плановая</th><th>Аварийная</th><th>Страховой запас</th><th>Точка заказа</th><th>Самозакупка</th></tr></thead><tbody>
+            <tr><td><strong>Инвестиционная (PS)</strong></td><td>ZI / ZG</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td><strong>Ремонт (TORO)</strong></td><td>ZR</td><td>ZW</td><td>✓</td><td>✓</td><td>ZA</td></tr>
+            <tr><td><strong>Текущая (MM)</strong></td><td>ZT</td><td>ZW</td><td>✓</td><td>✓</td><td>ZA</td></tr>
+            <tr><td><strong>Аварийный запас (MM)</strong></td><td>Z5</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+<!-- НОРМАТИВНЫЕ СРОКИ -->
+<div class="sec" id="leadtime">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-orange"></div><div class="sec-name">Нормативные сроки поставки</div><div class="sec-tags"><span class="tag tag-orange">Сроки</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>Нормативный срок поставки = Внутренний срок + Внешний срок.</strong> Хранится в SAP ERP (Основная запись материала). Организатор обязан поддерживать актуальность данных.</div>
+        <div class="flow">
+            <div class="flow-node n-start">Дата ввода потребности</div>
+            <div class="flow-arr"></div>
+            <div class="flow-row">
+                <div class="flow-col"><div class="flow-lbl">Внутренний срок</div><div class="flow-node n-blue">Консолидация + Закупочная процедура</div></div>
+            </div>
+            <div class="flow-arr"></div>
+            <div class="flow-node n-q">Заключение договора</div>
+            <div class="flow-arr"></div>
+            <div class="flow-row">
+                <div class="flow-col"><div class="flow-lbl">Внешний срок</div><div class="flow-node n-green">Производство + Доставка поставщиком</div></div>
+            </div>
+            <div class="flow-arr"></div>
+            <div class="flow-node n-start">Дата поставки</div>
+        </div>
+        <div class="heading">Компоненты</div>
+        <table class="tbl"><thead><tr><th>Компонент</th><th>Начало</th><th>Конец</th><th>Ответственный</th></tr></thead><tbody>
+            <tr><td><strong>Внутренний срок</strong></td><td>Дата ввода потребности</td><td>Дата заключения договора</td><td>Организатор закупки</td></tr>
+            <tr><td><strong>Внешний срок</strong></td><td>Дата получения заказа поставщиком</td><td>Дата поставки</td><td>Поставщик</td></tr>
+        </tbody></table>
+        <div class="callout callout-red"><strong>Признак «Срочная»:</strong> если дата потребности &lt; дата создания заявки + нормативный срок поставки → заявка автоматически получает признак срочной. Это увеличивает нагрузку на Организатора и снижает эффективность.<div class="callout-src">Приложение 5 к Стандарту планирования закупок</div></div>
+    </div>
+</div>
+
+<!-- КОРРЕКТИРОВКИ -->
+<div class="sec" id="corrections">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-amber"></div><div class="sec-name">Ежемесячные корректировки потребностей</div><div class="sec-tags"><span class="tag tag-amber">10-е число</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>10-го числа каждого месяца</strong> Организатор проводит ревизию потребностей. Четыре варианта решения по каждой корректировке.</div>
+        <div class="kps">
+            <div class="kp" style="border-left:3px solid var(--green);"><div class="kp-n" style="background:var(--green);">&#10003;</div><div class="kp-text"><strong>Принять</strong> корректировку как есть</div></div>
+            <div class="kp" style="border-left:3px solid var(--blue);"><div class="kp-n" style="background:var(--blue);">&#9998;</div><div class="kp-text"><strong>Скорректировать</strong> уровень потребности</div></div>
+            <div class="kp" style="border-left:3px solid var(--red);"><div class="kp-n" style="background:var(--red);">&#10007;</div><div class="kp-text"><strong>Отклонить</strong> корректировку</div></div>
+            <div class="kp" style="border-left:3px solid var(--amber);"><div class="kp-n" style="background:var(--amber);">?</div><div class="kp-text"><strong>Запросить</strong> дополнительную информацию</div></div>
+        </div>
+        <div class="heading">Обоснование корректировок</div>
+        <table class="tbl"><thead><tr><th>Тип изменения</th><th>Требуемое обоснование</th></tr></thead><tbody>
+            <tr><td>Новая потребность</td><td>Полное обоснование с ТЗ</td></tr>
+            <tr><td>Отмена потребности</td><td>Документ о закрытии</td></tr>
+            <tr><td>Перенос сроков</td><td>Причина и новая дата</td></tr>
+            <tr><td>Изменение объёма</td><td>Техническое обоснование</td></tr>
+            <tr><td>Изменение спецификации</td><td>Техническое изменение (ТИ)</td></tr>
+        </tbody></table>
+        <div class="callout callout-red"><strong>Внеплановая потребность:</strong> возникает, когда нормативный срок поставки превышает разницу между датой потребности и датой создания заявки. Классифицируется как срочная и требует обоснования.</div>
+    </div>
+</div>
+
+<!-- ПЛАНОВЫЕ ЦЕНЫ -->
+<div class="sec" id="pricing">
+    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-teal"></div><div class="sec-name">Методика формирования плановых цен</div><div class="sec-tags"><span class="tag tag-teal">Приложение 2</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-body">
+        <div class="callout callout-accent"><strong>Плановая цена</strong> — цена, внесённая в Основную запись материала (ОЗМ) SAP ERP. Организатор обязан обеспечить наличие плановой цены для каждой номенклатурной позиции. Обновление: ежегодное базовое, с периодическими пересмотрами.</div>
+        <div class="heading">Процесс ценообразования</div>
+        <div class="kps">
+            <div class="kp"><div class="kp-n" style="background:var(--teal);">1</div><div class="kp-text"><strong>Сбор данных.</strong> Анализ исторических цен закупок, рыночные котировки, коммерческие предложения.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--teal);">2</div><div class="kp-text"><strong>Расчёт.</strong> Определение плановой цены по методике Приложения 2 с учётом инфляции, сезонности, валютных курсов.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--teal);">3</div><div class="kp-text"><strong>Внесение в SAP.</strong> Обновление ОЗМ. При отсутствии позиции — заявка в НСИ на создание.</div></div>
+            <div class="kp"><div class="kp-n" style="background:var(--teal);">4</div><div class="kp-text"><strong>Контроль.</strong> Периодический пересмотр. Отклонение факта от плана — сигнал для обновления.</div></div>
+        </div>
+        <div class="heading">Системы учёта</div>
+        <table class="tbl"><thead><tr><th>Система</th><th>Назначение</th></tr></thead><tbody>
+            <tr><td><strong>SAP ERP / S/4 HANA</strong></td><td>Основная запись материала, потребности, бюджеты, планы</td></tr>
+            <tr><td><strong>НСИ</strong></td><td>Нормативно-справочная информация: номенклатурный справочник</td></tr>
+            <tr><td><strong>ЕИС</strong></td><td>Единая информационная система: публикация планов (для компаний по 223-ФЗ)</td></tr>
+        </tbody></table>
+    </div>
+</div>
+
+    </div>
+</div>
+
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg></button>
+
+<script>
+function toggle(h){h.closest('.sec').classList.toggle('open');}
+function expandAll(){document.querySelectorAll('.sec').forEach(s=>s.classList.add('open'));}
+function collapseAll(){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('open'));}
+function goTo(id){const el=document.getElementById(id);if(!el)return;el.classList.add('open');const top=el.getBoundingClientRect().top+window.pageYOffset-60;window.scrollTo({top,behavior:'smooth'});document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));event.target.closest('.nav-item')?.classList.add('active');closeSidebar();}
+function swTab(btn,id){const c=btn.closest('.sec-body');c.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));c.querySelectorAll('.tab-pane').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById(id)?.classList.add('on');}
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+window.addEventListener('scroll',()=>{document.querySelector('.scroll-top').classList.toggle('vis',window.pageYOffset>300);});
+window.addEventListener('scroll',()=>{const secs=document.querySelectorAll('.sec');const items=document.querySelectorAll('.nav-item');let cur='';secs.forEach(s=>{if(window.pageYOffset>=s.offsetTop-80)cur=s.id;});items.forEach(i=>{i.classList.remove('active');if(i.getAttribute('onclick')?.includes(cur))i.classList.add('active');});});
+(function(){var c=document.createElement('canvas');c.width=192;c.height=192;var x=c.getContext('2d');x.fillStyle='#0f1729';x.beginPath();x.roundRect(0,0,192,192,[40]);x.fill();x.font='bold 48px Inter,system-ui,sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillStyle='#2d8659';x.fillText('ПЛАН',96,80);x.font='bold 32px Inter,system-ui,sans-serif';x.fillStyle='rgba(255,255,255,.7)';x.fillText('закупок',96,124);var iconURL=c.toDataURL('image/png');var link=document.querySelector('link[rel="apple-touch-icon"]');if(link)link.href=iconURL;var manifest={name:'Планирование закупок',short_name:'План',start_url:location.href,display:'standalone',background_color:'#0f1729',theme_color:'#0f1729',orientation:'any',icons:[{src:iconURL,sizes:'192x192',type:'image/png'}]};var blob=new Blob([JSON.stringify(manifest)],{type:'application/json'});var ml=document.querySelector('link[rel="manifest"]');if(ml)ml.href=URL.createObjectURL(blob);if('serviceWorker' in navigator){var sw='var C="plan-v1";self.addEventListener("install",function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(["./"])}))});self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request)}))})';navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(function(){});}})();
+</script>
+</body>
+</html>
