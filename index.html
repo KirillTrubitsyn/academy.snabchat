@@ -10,6 +10,7 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="description" content="Корпоративная академия СнабЧат — интерактивные курсы по закупкам для сотрудников группы СГК">
     <title>СнабЧат Academy — Обучающий портал</title>
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
     <link rel="manifest" href="data:application/json;charset=utf-8,%7B%7D">
     <link rel="apple-touch-icon" href="data:,">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -173,9 +174,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg-
         <a href="/" class="logo">
             <div class="logo-icon">
                 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="120" y="100" width="200" height="260" rx="28" fill="#0D47A1"/>
-                    <rect x="160" y="140" width="200" height="260" rx="28" fill="#1976D2"/>
-                    <rect x="200" y="180" width="200" height="260" rx="28" fill="#42A5F5"/>
+                    <rect x="120" y="100" width="200" height="260" rx="28" fill="#E65100"/>
+                    <rect x="160" y="140" width="200" height="260" rx="28" fill="#F57C00"/>
+                    <rect x="200" y="180" width="200" height="260" rx="28" fill="#FFB74D"/>
                     <rect x="328" y="368" width="52" height="40" rx="12" fill="#fff"/>
                     <polygon points="338,408 328,424 348,408" fill="#fff"/>
                 </svg>
@@ -371,36 +372,51 @@ function closeMob() {
 
 // PWA
 (function(){
-  var c = document.createElement('canvas');
-  c.width = 192; c.height = 192;
-  var x = c.getContext('2d');
-  x.fillStyle = '#1976D2';
-  x.beginPath(); x.roundRect(0,0,192,192,[40]); x.fill();
-  x.font = 'bold 36px Inter,system-ui,sans-serif';
-  x.textAlign = 'center'; x.textBaseline = 'middle';
-  x.fillStyle = '#ffffff';
-  x.fillText('СНАБ', 96, 72);
-  x.font = 'bold 28px Inter,system-ui,sans-serif';
-  x.fillStyle = 'rgba(255,255,255,.75)';
-  x.fillText('Academy', 96, 116);
-  var iconURL = c.toDataURL('image/png');
+  function drawIcon(size) {
+    var c = document.createElement('canvas');
+    c.width = size; c.height = size;
+    var x = c.getContext('2d');
+    var s = size / 512;
+    // Background squircle
+    x.fillStyle = '#FFF3E0';
+    x.beginPath(); x.roundRect(0, 0, size, size, [112 * s]); x.fill();
+    // Back card
+    x.fillStyle = '#E65100';
+    x.beginPath(); x.roundRect(120*s, 100*s, 200*s, 260*s, [28*s]); x.fill();
+    // Middle card
+    x.fillStyle = '#F57C00';
+    x.beginPath(); x.roundRect(160*s, 140*s, 200*s, 260*s, [28*s]); x.fill();
+    // Front card
+    x.fillStyle = '#FFB74D';
+    x.beginPath(); x.roundRect(200*s, 180*s, 200*s, 260*s, [28*s]); x.fill();
+    // Chat bubble
+    x.fillStyle = '#FFFFFF';
+    x.beginPath(); x.roundRect(328*s, 368*s, 52*s, 40*s, [12*s]); x.fill();
+    x.beginPath(); x.moveTo(338*s, 408*s); x.lineTo(328*s, 424*s); x.lineTo(348*s, 408*s); x.fill();
+    return c.toDataURL('image/png');
+  }
+  var icon192 = drawIcon(192);
+  var icon512 = drawIcon(512);
   var link = document.querySelector('link[rel="apple-touch-icon"]');
-  if (link) link.href = iconURL;
+  if (link) link.href = icon192;
   var manifest = {
     name: 'СнабЧат Academy',
     short_name: 'Academy',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
-    theme_color: '#ffffff',
+    theme_color: '#F57C00',
     orientation: 'any',
-    icons: [{src: iconURL, sizes: '192x192', type: 'image/png'}]
+    icons: [
+      {src: icon192, sizes: '192x192', type: 'image/png'},
+      {src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable'}
+    ]
   };
   var blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
   var ml = document.querySelector('link[rel="manifest"]');
   if (ml) ml.href = URL.createObjectURL(blob);
   if ('serviceWorker' in navigator) {
-    var sw = 'var C="academy-v2";self.addEventListener("install",function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(["./"])}))});self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request)}))})';
+    var sw = 'var C="academy-v3";self.addEventListener("install",function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(["./"])}))});self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request)}))})';
     navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(function(){});
   }
 })();

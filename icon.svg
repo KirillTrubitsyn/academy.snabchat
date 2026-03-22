@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="squircle">
+      <rect width="512" height="512" rx="112" ry="112"/>
+    </clipPath>
+  </defs>
+  <rect width="512" height="512" rx="112" ry="112" fill="#FFF3E0"/>
+  <g clip-path="url(#squircle)">
+    <!-- Back card -->
+    <rect x="120" y="100" width="200" height="260" rx="28" fill="#E65100"/>
+    <!-- Middle card -->
+    <rect x="160" y="140" width="200" height="260" rx="28" fill="#F57C00"/>
+    <!-- Front card -->
+    <rect x="200" y="180" width="200" height="260" rx="28" fill="#FFB74D"/>
+    <!-- Chat bubble on front card -->
+    <rect x="328" y="368" width="52" height="40" rx="12" fill="#FFFFFF"/>
+    <polygon points="338,408 328,424 348,408" fill="#FFFFFF"/>
+  </g>
+</svg>
