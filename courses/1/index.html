@@ -296,7 +296,27 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
     .main-wrap{margin-left:0;}
     .sec-body{display:block!important;}
 }
-    </style>
+    
+/* === ILLUSTRATIONS === */
+.sec-img-float{max-width:260px;border-radius:12px;margin-bottom:1rem;box-shadow:0 4px 20px rgba(0,0,0,.1);opacity:.9;transition:opacity .3s;}
+.sec-img-float:hover{opacity:1;}
+.sec-img-float.right{float:right;margin-left:1.5rem;margin-right:0;}
+.sec-img-float.left{float:left;margin-right:1.5rem;margin-left:0;}
+.sec-img-divider{width:100%;max-height:180px;object-fit:cover;border-radius:12px;margin:1.5rem 0;box-shadow:0 4px 20px rgba(0,0,0,.08);opacity:.85;}
+.sec-cards-bg{position:relative;}
+.sec-cards-bg::after{content:'';position:absolute;inset:0;background-size:cover;background-position:center;opacity:.05;border-radius:12px;pointer-events:none;z-index:0;}
+.sec-cards-bg>*{position:relative;z-index:1;}
+@media(max-width:768px){
+    .sec-img-float{max-width:140px;margin-bottom:.75rem;}
+    .sec-img-float.right{margin-left:1rem;}
+    .sec-img-float.left{margin-right:1rem;}
+    .sec-img-divider{max-height:120px;margin:1rem 0;}
+}
+@media(max-width:480px){
+    .sec-img-float{max-width:110px;font-size:0;}
+    .sec-img-divider{max-height:80px;}
+}
+</style>
 </head>
 <body>
 
@@ -383,6 +403,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
     <div class="sec-body">
+<img src="img/likbez.jpg" alt="Правовые документы" class="sec-img-float right" loading="lazy">
         <div class="callout callout-accent"><strong>Суть закона.</strong> Федеральный закон № 223-ФЗ «О закупках товаров, работ, услуг отдельными видами юридических лиц» устанавливает общие принципы и требования к закупочной деятельности организаций с государственным участием. Цель: прозрачность, конкуренция, эффективное расходование средств.</div>
 
         <div class="heading">Кто подпадает под действие 223-ФЗ</div>
@@ -438,7 +459,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <div class="sec-left"><div class="sec-dot c-green"></div><div class="sec-name">Компании группы СГК</div><div class="sec-tags"><span class="tag tag-blue">38 по 223-ФЗ</span><span class="tag tag-orange">10 вне</span></div></div>
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
-    <div class="sec-body">
+    <div class="sec-body sec-cards-bg" style="background-image:url(img/companies.jpg);">
         <div class="callout callout-accent"><strong>38 компаний</strong> группы СГК работают по 223-ФЗ. Порог простой закупки для большинства — <strong>500 тыс. руб.</strong> с НДС. Для компаний с годовой выручкой менее 5 млрд руб. — пониженный порог <strong>100 тыс. руб.</strong></div>
         <input type="text" class="search" id="companySearch" placeholder="Поиск по названию..." oninput="filterCo()">
         <div class="tabs">
@@ -518,6 +539,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
             <tr><td><strong>Запрос котировок (RFQ)</strong></td><td>Выбор по цене для стандартных МТР и услуг</td><td>Открытый, электронный, закрытый</td></tr>
             <tr><td><strong>Запрос предложений (RFP)</strong></td><td>Выбор по совокупности критериев с техоценкой, переговорами</td><td>Открытый, электронный, закрытый</td></tr>
         </tbody></table>
+<img src="img/methods.jpg" alt="Документы закупок" class="sec-img-divider" loading="lazy">
         <div class="heading">Неконкурентные способы</div>
         <table class="tbl"><thead><tr><th>Способ</th><th>Суть</th><th>Условия</th></tr></thead><tbody>
             <tr><td><strong>Простая закупка</strong></td><td>Оплата по счёту или договорное письмо</td><td>До 100/500 тыс. руб.</td></tr>
@@ -543,6 +565,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
     <div class="sec-body">
+<img src="img/thresholds.jpg" alt="Финансовые пороги" class="sec-img-float left" loading="lazy">
         <div class="thresh-bar">
             <div class="thresh-seg" style="flex:1;background:var(--green);">До 100 тыс.<br>Оплата по счёту</div>
             <div class="thresh-seg" style="flex:1.5;background:var(--orange);">100–500 тыс.<br>ЕИ (малые)</div>
@@ -701,9 +724,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 
 <!-- ===== РОЛИ ===== -->
 <div class="sec" id="roles">
-    <div class="sec-head" onclick="toggle(this)">
+    <div class="sec-head" onclick="toggle(this)" style="position:relative;overflow:hidden;">
         <div class="sec-left"><div class="sec-dot c-blue"></div><div class="sec-name">Роли участников закупочного процесса</div><div class="sec-tags"><span class="tag tag-blue">6 ролей</span></div></div>
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+<div style="position:absolute;top:0;right:0;bottom:0;width:50%;background:url(img/roles.jpg) center/cover;opacity:.08;mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);pointer-events:none;border-radius:0 12px 0 0;"></div>
     </div>
     <div class="sec-body">
         <div class="role-grid">
@@ -724,6 +748,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
     <div class="sec-body">
+<img src="img/collegial.jpg" alt="Зал заседаний" class="sec-img-float right" loading="lazy">
         <div class="callout callout-accent"><strong>Трёхуровневая система ЗКО</strong> обеспечивает коллегиальный контроль закупочных решений. Уровень определяется суммой и стратегической значимостью.</div>
         <div class="heading">Уровни ЗКО</div>
         <div class="kps">
@@ -781,6 +806,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
             <tr><td>Централизованная</td><td><strong>Консультант по закупкам</strong></td></tr>
             <tr><td>Децентрализованная</td><td><strong>Организатор в Компании Общества</strong></td></tr>
         </tbody></table>
+<img src="img/nmcd.jpg" alt="Ценовая аналитика" class="sec-img-divider" loading="lazy">
     </div>
 </div>
 

@@ -174,7 +174,27 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 /* Mobile */
 @media(max-width:768px){.sidebar{transform:translateX(-100%);width:290px;}.sidebar.open{transform:translateX(0);}.overlay.open{display:block;}.main-wrap{margin-left:0;}.burger{display:flex;}.content{padding:1rem .75rem;}.topbar{padding:.6rem 1rem;}.sec-head{padding:.75rem 1rem;min-height:48px;}.sec-body{padding:1rem;}.nav-item{padding:.7rem 1.3rem;min-height:44px;}.flow-row{flex-direction:column;align-items:center;}.role-grid{grid-template-columns:1fr;}.tbl{font-size:.75rem;}.tbl th,.tbl td{padding:.45rem .5rem;}.scroll-top{bottom:1rem;right:1rem;width:44px;height:44px;}.kps{gap:.4rem;}.kp{padding:.55rem .65rem;}body{padding-bottom:env(safe-area-inset-bottom);}}
 @media(max-width:400px){.content{padding:.75rem .5rem;}.sec-head{padding:.65rem .75rem;}.sec-body{padding:.75rem;}.sec-name{font-size:.82rem;}.tag{font-size:.52rem;}.topbar-title{font-size:.85rem;}}
-    </style>
+    
+/* === ILLUSTRATIONS === */
+.sec-img-float{max-width:260px;border-radius:12px;margin-bottom:1rem;box-shadow:0 4px 20px rgba(0,0,0,.1);opacity:.9;transition:opacity .3s;}
+.sec-img-float:hover{opacity:1;}
+.sec-img-float.right{float:right;margin-left:1.5rem;margin-right:0;}
+.sec-img-float.left{float:left;margin-right:1.5rem;margin-left:0;}
+.sec-img-divider{width:100%;max-height:180px;object-fit:cover;border-radius:12px;margin:1.5rem 0;box-shadow:0 4px 20px rgba(0,0,0,.08);opacity:.85;}
+.sec-cards-bg{position:relative;}
+.sec-cards-bg::after{content:'';position:absolute;inset:0;background-size:cover;background-position:center;opacity:.05;border-radius:12px;pointer-events:none;z-index:0;}
+.sec-cards-bg>*{position:relative;z-index:1;}
+@media(max-width:768px){
+    .sec-img-float{max-width:140px;margin-bottom:.75rem;}
+    .sec-img-float.right{margin-left:1rem;}
+    .sec-img-float.left{margin-right:1rem;}
+    .sec-img-divider{max-height:120px;margin:1rem 0;}
+}
+@media(max-width:480px){
+    .sec-img-float{max-width:110px;font-size:0;}
+    .sec-img-divider{max-height:80px;}
+}
+</style>
 </head>
 <body>
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -231,6 +251,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 <div class="sec open" id="intro">
     <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-accent"></div><div class="sec-name">Введение: зачем планировать закупки</div><div class="sec-tags"><span class="tag tag-accent">Основы</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
     <div class="sec-body">
+        <img src="img/intro.jpg" alt="Планирование и ежедневник" class="sec-img-float right" loading="lazy">
         <div class="callout callout-accent"><strong>Стандарт планирования закупок товаров (работ, услуг)</strong> — ред. 1.0. Процесс В5 «Материально-техническое обеспечение». Владелец процесса: Директор по закупкам. Утверждён Приказом ГО-121 от 28.06.2024.</div>
         <div class="heading">Цель стандарта</div>
         <div class="kps">
@@ -253,7 +274,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 
 <!-- ВИДЫ ПОТРЕБНОСТЕЙ -->
 <div class="sec" id="needs">
-    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-blue"></div><div class="sec-name">Виды потребностей</div><div class="sec-tags"><span class="tag tag-blue">10 типов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-head" style="position:relative;overflow:hidden;" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-blue"></div><div class="sec-name">Виды потребностей</div><div class="sec-tags"><span class="tag tag-blue">10 типов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg><div style="position:absolute;top:0;right:0;bottom:0;width:50%;background:url(img/needs.jpg) center/cover;opacity:.08;mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);pointer-events:none;border-radius:0 12px 0 0;"></div></div>
     <div class="sec-body">
         <div class="heading">Основные категории</div>
         <div class="kps">
@@ -281,6 +302,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 <div class="sec" id="cycles">
     <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-green"></div><div class="sec-name">Циклы планирования</div><div class="sec-tags"><span class="tag tag-green">5 циклов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
     <div class="sec-body">
+        <img src="img/cycles.jpg" alt="Часовой механизм" class="sec-img-float left" loading="lazy">
         <table class="tbl"><thead><tr><th>Цикл</th><th>Период</th><th>Ключевые действия</th></tr></thead><tbody>
             <tr><td><strong>Годовой</strong></td><td>Календарный год</td><td>Формирование плана закупок, публикация в ЕИС (до 31 декабря)</td></tr>
             <tr><td><strong>Полугодовой</strong></td><td>6 месяцев</td><td>Консолидация потребностей, корректировка планов</td></tr>
@@ -313,13 +335,14 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
             <tr><td><strong>45 рабочих дней</strong></td><td>До подписания договора — стандартная процедура</td></tr>
             <tr><td><strong>60 рабочих дней</strong></td><td>До подписания договора — процедуры только для МСП</td></tr>
         </tbody></table>
+        <img src="img/deadlines.jpg" alt="Песочные часы" class="sec-img-divider" loading="lazy">
     </div>
 </div>
 
 <!-- РОЛИ -->
 <div class="sec" id="roles">
     <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-purple"></div><div class="sec-name">Роли в планировании закупок</div><div class="sec-tags"><span class="tag tag-purple">5 ролей</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
-    <div class="sec-body">
+    <div class="sec-body sec-cards-bg" style="background-image:url(img/roles.jpg);">
         <div class="role-grid">
             <div class="role"><div class="role-icon" style="background:var(--accent-soft);color:var(--accent);">&#9881;</div><div class="role-t">Организатор закупки</div><div class="role-d">Ведение нормативных сроков поставки. Обеспечение плановых цен в SAP ERP. Формирование планов закупок в течение 30 дней. Публикация в ЕИС (10 дней с утверждения). Ежемесячная корректировка (10-е число).</div></div>
             <div class="role"><div class="role-icon" style="background:var(--blue-soft);color:var(--blue);">&#9998;</div><div class="role-t">Инициатор закупки</div><div class="role-d">Формирование и согласование потребностей с техническими и финансовыми службами. Актуализация данных в SAP ERP. Обоснование срочности и ЕИ. Уведомление о предписаниях (5 рабочих дней). Подача заявок (14 дней).</div></div>
@@ -332,7 +355,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 
 <!-- SAP-КОДЫ -->
 <div class="sec" id="sap">
-    <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-teal"></div><div class="sec-name">SAP-коды типов заявок</div><div class="sec-tags"><span class="tag tag-teal">SAP ERP</span><span class="tag tag-blue">6 кодов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
+    <div class="sec-head" style="position:relative;overflow:hidden;" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-teal"></div><div class="sec-name">SAP-коды типов заявок</div><div class="sec-tags"><span class="tag tag-teal">SAP ERP</span><span class="tag tag-blue">6 кодов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg><div style="position:absolute;top:0;right:0;bottom:0;width:50%;background:url(img/sap.jpg) center/cover;opacity:.08;mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);pointer-events:none;border-radius:0 12px 0 0;"></div></div>
     <div class="sec-body">
         <table class="tbl"><thead><tr><th>Код</th><th>Вид</th><th>Модуль SAP</th><th>Источник</th></tr></thead><tbody>
             <tr><td><strong>ZI / ZG</strong></td><td>Инвестиционная деятельность</td><td>PS (ZI) / альтернативный (ZG)</td><td>Проектные программы</td></tr>
@@ -385,6 +408,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 <div class="sec" id="corrections">
     <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-amber"></div><div class="sec-name">Ежемесячные корректировки потребностей</div><div class="sec-tags"><span class="tag tag-amber">10-е число</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
     <div class="sec-body">
+        <img src="img/corrections.jpg" alt="Корректировки документа" class="sec-img-float right" loading="lazy">
         <div class="callout callout-accent"><strong>10-го числа каждого месяца</strong> Организатор проводит ревизию потребностей. Четыре варианта решения по каждой корректировке.</div>
         <div class="kps">
             <div class="kp" style="border-left:3px solid var(--green);"><div class="kp-n" style="background:var(--green);">&#10003;</div><div class="kp-text"><strong>Принять</strong> корректировку как есть</div></div>
@@ -422,6 +446,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
             <tr><td><strong>НСИ</strong></td><td>Нормативно-справочная информация: номенклатурный справочник</td></tr>
             <tr><td><strong>ЕИС</strong></td><td>Единая информационная система: публикация планов (для компаний по 223-ФЗ)</td></tr>
         </tbody></table>
+        <img src="img/pricing.jpg" alt="Ценовая аналитика" class="sec-img-divider" loading="lazy">
     </div>
 </div>
 

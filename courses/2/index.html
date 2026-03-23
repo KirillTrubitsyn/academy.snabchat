@@ -273,7 +273,27 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
     .step-d{font-size:.74rem;}
     .role-d{font-size:.74rem;}
 }
-    </style>
+    
+/* === ILLUSTRATIONS === */
+.sec-img-float{max-width:260px;border-radius:12px;margin-bottom:1rem;box-shadow:0 4px 20px rgba(0,0,0,.1);opacity:.9;transition:opacity .3s;}
+.sec-img-float:hover{opacity:1;}
+.sec-img-float.right{float:right;margin-left:1.5rem;margin-right:0;}
+.sec-img-float.left{float:left;margin-right:1.5rem;margin-left:0;}
+.sec-img-divider{width:100%;max-height:180px;object-fit:cover;border-radius:12px;margin:1.5rem 0;box-shadow:0 4px 20px rgba(0,0,0,.08);opacity:.85;}
+.sec-cards-bg{position:relative;}
+.sec-cards-bg::after{content:'';position:absolute;inset:0;background-size:cover;background-position:center;opacity:.05;border-radius:12px;pointer-events:none;z-index:0;}
+.sec-cards-bg>*{position:relative;z-index:1;}
+@media(max-width:768px){
+    .sec-img-float{max-width:140px;margin-bottom:.75rem;}
+    .sec-img-float.right{margin-left:1rem;}
+    .sec-img-float.left{margin-right:1rem;}
+    .sec-img-divider{max-height:120px;margin:1rem 0;}
+}
+@media(max-width:480px){
+    .sec-img-float{max-width:110px;font-size:0;}
+    .sec-img-divider{max-height:80px;}
+}
+</style>
 </head>
 <body>
 
@@ -370,6 +390,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
     <div class="sec-body">
+        <img src="img/intro.jpg" alt="Два регламента закупок" class="sec-img-float right" loading="lazy">
         <div class="callout callout-accent"><strong>О чём этот курс.</strong> ООО «Сибирская генерирующая компания» (ООО СГК) не является субъектом 223-ФЗ. Закупочная деятельность ООО СГК регулируется внутренним Стандартом закупок товаров, работ и услуг вне 223-ФЗ (редакция 2.0). Этот стандарт устанавливает единые правила для Головного офиса и всех филиалов.</div>
 
         <div class="heading">Почему закупки вне 223-ФЗ отличаются</div>
@@ -396,9 +417,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 
 <!-- ===== СТРУКТУРА ===== -->
 <div class="sec" id="branches">
-    <div class="sec-head" onclick="toggle(this)">
+    <div class="sec-head" onclick="toggle(this)" style="position:relative;overflow:hidden;">
         <div class="sec-left"><div class="sec-dot c-green"></div><div class="sec-name">Структура ООО СГК</div><div class="sec-tags"><span class="tag tag-green">5 филиалов</span></div></div>
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        <div style="position:absolute;top:0;right:0;bottom:0;width:50%;background:url(img/branches.jpg) center/cover;opacity:.08;mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);pointer-events:none;border-radius:0 12px 0 0;"></div>
     </div>
     <div class="sec-body">
         <div class="callout callout-accent">Стандарт распространяется на <strong>ООО «Сибирская генерирующая компания»</strong> и все его филиалы. Филиал — функциональное подразделение Общества, организованное по профилю деятельности и географическому расположению.</div>
@@ -426,6 +448,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
             <tr><td><strong>Запрос предложений (RFP)</strong></td><td>Выбор по совокупности критериев: цена + качество + техпараметры</td><td>Сложные закупки, стратегические</td></tr>
             <tr><td><strong>Закупка у ЕИ</strong></td><td>У единственного поставщика с обоснованием по п. 3.5.4</td><td>Нет аналогов, исключительные права, монополия</td></tr>
         </tbody></table>
+        <img src="img/methods.jpg" alt="Заключение контракта" class="sec-img-divider" loading="lazy">
         <div class="heading">Специальные способы</div>
         <table class="tbl"><thead><tr><th>Способ</th><th>Суть</th><th>Условия</th></tr></thead><tbody>
             <tr><td><strong>Биржевые торги</strong></td><td>Покупка товарных категорий на торговой бирже</td><td>Сырьё, металлы, топливо</td></tr>
@@ -450,6 +473,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
     <div class="sec-body">
+        <img src="img/thresholds.jpg" alt="Финансовые пороги" class="sec-img-float left" loading="lazy">
         <div class="callout callout-accent"><strong>Предельная сумма закупки</strong> — общая сумма расходов на закупку с учётом всех дополнительных затрат, включая опционы покупателя. На основании предельной суммы определяется уровень принятия решений: Уполномоченный руководитель или ЗКО.</div>
         <div class="thresh-bar">
             <div class="thresh-seg" style="flex:1;background:var(--green);">До 5 млн<br>УР без ЗКО</div>
@@ -584,7 +608,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <div class="sec-left"><div class="sec-dot c-blue"></div><div class="sec-name">Роли участников закупочного процесса</div><div class="sec-tags"><span class="tag tag-blue">7 ролей</span></div></div>
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
-    <div class="sec-body">
+    <div class="sec-body sec-cards-bg" style="background-image:url(img/roles.jpg);">
         <div class="role-grid">
             <div class="role"><div class="role-icon" style="background:var(--accent-soft);color:var(--accent);">&#9733;</div><div class="role-t">Владелец процесса</div><div class="role-d">Директор по закупкам. Формирование, внедрение, контроль и совершенствование процесса В5. Утверждение Стандарта.</div></div>
             <div class="role"><div class="role-icon" style="background:var(--blue-soft);color:var(--blue);">&#9998;</div><div class="role-t">Инициатор закупки</div><div class="role-d">Формирует потребность, ТЗ, бюджет, сроки. Рекомендует поставщиков. Проводит техоценку. Принимает результат.</div></div>
@@ -599,9 +623,10 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 
 <!-- ===== ПРОЦЕСС ===== -->
 <div class="sec" id="process">
-    <div class="sec-head" onclick="toggle(this)">
+    <div class="sec-head" onclick="toggle(this)" style="position:relative;overflow:hidden;">
         <div class="sec-left"><div class="sec-dot c-teal"></div><div class="sec-name">Процесс закупки: 12 фаз</div><div class="sec-tags"><span class="tag tag-teal">Алгоритм</span></div></div>
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        <div style="position:absolute;top:0;right:0;bottom:0;width:50%;background:url(img/process.jpg) center/cover;opacity:.08;mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);-webkit-mask-image:linear-gradient(to left,rgba(0,0,0,.5),transparent);pointer-events:none;border-radius:0 12px 0 0;"></div>
     </div>
     <div class="sec-body">
         <div class="callout callout-accent">Полный цикл закупки от потребности до исполнения. Некоторые фазы опциональны в зависимости от способа (простая закупка пропускает фазы 4, 6, 8, 9).</div>
@@ -629,6 +654,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
     <div class="sec-body">
+        <img src="img/special.jpg" alt="Аварийная кнопка" class="sec-img-float right" loading="lazy">
         <div class="heading">Рамочные договоры (ст. 429.1 ГК РФ)</div>
         <div class="callout callout-accent">Рамочный договор устанавливает общие условия. Конкретные объёмы, цены и сроки фиксируются в Дополнительных соглашениях (ДС) и спецификациях. Может действовать несколько лет.</div>
         <div class="kps">
