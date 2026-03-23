@@ -160,8 +160,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 
 /* Roles */
 .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.5rem;}
-.role{background:var(--bg);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:.75rem;transition:border-color .15s;}
-.role:hover{border-color:var(--accent);}
+.role{background:rgba(255,255,255,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:.75rem;transition:all .15s;}
+.role:hover{border-color:var(--accent);background:rgba(255,255,255,.8);}
 .role-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:.4rem;}
 .role-t{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.25rem;}
 .role-d{font-size:.76rem;color:var(--text-2);line-height:1.5;}
@@ -280,8 +280,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 .sec-img-float.right{float:right;margin-left:1.5rem;margin-right:0;}
 .sec-img-float.left{float:left;margin-right:1.5rem;margin-left:0;}
 .sec-img-divider{width:100%;max-height:180px;object-fit:cover;border-radius:12px;margin:1.5rem 0;box-shadow:0 4px 20px rgba(0,0,0,.08);opacity:.85;}
-.sec-cards-bg{position:relative;}
-.sec-cards-bg::after{content:'';position:absolute;inset:0;background-size:cover;background-position:center;opacity:.05;border-radius:12px;pointer-events:none;z-index:0;}
+.sec-cards-bg{position:relative;background-size:cover;background-position:center;}
+.sec-cards-bg::before{content:'';position:absolute;inset:0;background:inherit;background-size:cover;background-position:center;opacity:.15;border-radius:12px;pointer-events:none;z-index:0;}
+.sec-cards-bg::after{content:'';position:absolute;inset:0;background:rgba(244,245,247,.6);border-radius:12px;pointer-events:none;z-index:0;}
 .sec-cards-bg>*{position:relative;z-index:1;}
 @media(max-width:768px){
     .sec-img-float{max-width:140px;margin-bottom:.75rem;}
