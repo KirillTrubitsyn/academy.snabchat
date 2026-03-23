@@ -176,6 +176,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 @media(max-width:400px){.content{padding:.75rem .5rem;}.sec-head{padding:.65rem .75rem;}.sec-body{padding:.75rem;}.sec-name{font-size:.82rem;}.tag{font-size:.52rem;}.topbar-title{font-size:.85rem;}}
     
 /* === ILLUSTRATIONS === */
+.img-table-row{display:flex;gap:1.5rem;align-items:flex-start;margin-bottom:1rem;}
+.img-table-row>img{width:260px;flex-shrink:0;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.1);opacity:.9;}
+.img-table-row>.tbl{flex:1;min-width:0;}
 .sec-img-float{max-width:260px;border-radius:12px;margin-bottom:1rem;box-shadow:0 4px 20px rgba(0,0,0,.1);opacity:.9;transition:opacity .3s;}
 .sec-img-float:hover{opacity:1;}
 .sec-img-float.right{float:right;margin-left:1.5rem;margin-right:0;}
@@ -186,6 +189,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 .sec-cards-bg>*{position:relative;z-index:1;}
 @media(max-width:768px){
     .sec-img-float{max-width:140px;margin-bottom:.75rem;}
+    .img-table-row{flex-direction:column;}
+    .img-table-row>img{width:100%;max-width:300px;}
     .sec-img-float.right{margin-left:1rem;}
     .sec-img-float.left{margin-right:1rem;}
     .sec-img-divider{max-height:120px;margin:1rem 0;}
@@ -302,14 +307,16 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 <div class="sec" id="cycles">
     <div class="sec-head" onclick="toggle(this)"><div class="sec-left"><div class="sec-dot c-green"></div><div class="sec-name">Циклы планирования</div><div class="sec-tags"><span class="tag tag-green">5 циклов</span></div></div><svg class="chevron" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div>
     <div class="sec-body">
-        <img src="img/cycles.jpg" alt="Часовой механизм" class="sec-img-float left" loading="lazy">
-        <table class="tbl"><thead><tr><th>Цикл</th><th>Период</th><th>Ключевые действия</th></tr></thead><tbody>
+        <div class="img-table-row">
+        <img src="img/cycles.jpg" alt="Часовой механизм" loading="lazy">
+        <table class="tbl" style="margin-bottom:0;"><thead><tr><th>Цикл</th><th>Период</th><th>Ключевые действия</th></tr></thead><tbody>
             <tr><td><strong>Годовой</strong></td><td>Календарный год</td><td>Формирование плана закупок, публикация в ЕИС (до 31 декабря)</td></tr>
             <tr><td><strong>Полугодовой</strong></td><td>6 месяцев</td><td>Консолидация потребностей, корректировка планов</td></tr>
             <tr><td><strong>Квартальный</strong></td><td>3 месяца</td><td>Квартальная консолидация, уточнение сроков и объёмов</td></tr>
             <tr><td><strong>Месячный</strong></td><td>1 месяц</td><td>Корректировки потребностей (10-е число каждого месяца)</td></tr>
             <tr><td><strong>Внеплановый</strong></td><td>По факту</td><td>Когда нормативный срок &gt; (дата потребности − дата создания заявки)</td></tr>
         </tbody></table>
+        </div>
         <div class="heading">Заявочные кампании (Приложение 4)</div>
         <div class="callout callout-accent">Заявочные кампании — регулярные периоды приёма потребностей от Инициаторов. Сроки кампаний определяются по категориям и источникам финансирования: инвестиционные, ремонтные, текущие, прогнозные.</div>
     </div>
