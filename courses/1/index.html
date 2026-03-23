@@ -169,8 +169,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 
 /* Company grid */
 .co-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.5rem;}
-.co-card{padding:.6rem .8rem;border-radius:var(--radius-sm);border:1px solid var(--border-light);background:var(--card);display:flex;align-items:center;justify-content:space-between;gap:.5rem;transition:all .15s;}
-.co-card:hover{border-color:var(--accent);box-shadow:var(--shadow-sm);}
+.co-card{padding:.6rem .8rem;border-radius:var(--radius-sm);border:1px solid var(--border-light);background:rgba(255,255,255,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:space-between;gap:.5rem;transition:all .15s;}
+.co-card:hover{border-color:var(--accent);box-shadow:var(--shadow-sm);background:rgba(255,255,255,.8);}
 .co-card.fz .co-badge{background:var(--blue-soft);color:var(--blue);}
 .co-card.nonfz{opacity:.55;}
 .co-card.nonfz .co-badge{background:var(--bg);color:var(--text-3);}
@@ -303,8 +303,9 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
 .sec-img-float.right{float:right;margin-left:1.5rem;margin-right:0;}
 .sec-img-float.left{float:left;margin-right:1.5rem;margin-left:0;}
 .sec-img-divider{width:100%;max-height:180px;object-fit:cover;border-radius:12px;margin:1.5rem 0;box-shadow:0 4px 20px rgba(0,0,0,.08);opacity:.85;}
-.sec-cards-bg{position:relative;}
-.sec-cards-bg::after{content:'';position:absolute;inset:0;background-size:cover;background-position:center;opacity:.05;border-radius:12px;pointer-events:none;z-index:0;}
+.sec-cards-bg{position:relative;background-size:cover;background-position:center;}
+.sec-cards-bg::before{content:'';position:absolute;inset:0;background:inherit;background-size:cover;background-position:center;opacity:.15;border-radius:12px;pointer-events:none;z-index:0;}
+.sec-cards-bg::after{content:'';position:absolute;inset:0;background:rgba(244,245,247,.6);border-radius:12px;pointer-events:none;z-index:0;}
 .sec-cards-bg>*{position:relative;z-index:1;}
 @media(max-width:768px){
     .sec-img-float{max-width:140px;margin-bottom:.75rem;}
